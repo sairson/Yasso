@@ -368,7 +368,7 @@ func (s *setting) Install_clr(flag int) bool {
 	}
 	Println("[+] Install SQLKit successful!")
 	Println("[+] Please Use SQL Connect Tools to Execute")
-	Println("[+] WarSQLKit Command Help --SQLKit [1,2]")
+	Println("[+] WarSQLKit Command Help --kithelp [1,2]")
 	return true
 }
 
