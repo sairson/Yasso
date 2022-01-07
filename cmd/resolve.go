@@ -3,12 +3,22 @@ package cmd
 import (
 	"errors"
 	"net"
+	"os"
 	"regexp"
 	"strconv"
 	"strings"
 )
 
 func ResolveIPS(ip string)([]string,error){
+	if strings.Contains(ip,".") && strings.Contains(ip,".txt") {
+		// 此时传入的是文件txt
+		file, err := os.Open(ip)
+		if err != nil {
+			return []string{},err
+		}
+		ips := Readiness(file)
+		return ips,err
+	}
 	reg := regexp.MustCompile(`[a-zA-Z]+`)
 	switch  {
 	case strings.Contains(ip,"/"):

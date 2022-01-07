@@ -15,7 +15,7 @@ import (
 func init(){
 	rootCmd.AddCommand(DisMapCmd)
 	DisMapCmd.Flags().DurationVarP(&TimeDuration,"time","t",1 * time.Second,"Set timeout (eg.) -t 50ms(ns,ms,s,m,h)")
-	DisMapCmd.Flags().StringVarP(&Hosts,"hosts","H","","Set `hosts`(The format is similar to Nmap)")
+	DisMapCmd.Flags().StringVarP(&Hosts,"hosts","H","","Set `hosts`(The format is similar to Nmap) or ips.txt file path")
 	DisMapCmd.Flags().StringVarP(&Ports,"ports","p","","Set `ports`(The format is similar to Nmap)(eg.) 1-2000,3389")
 	DisMapCmd.Flags().IntVarP(&Runtime,"runtime","r",508,"Set scanner ants pool thread")
 	DisMapCmd.Flags().BoolVar(&PingBool,"ping",false,"Use ping to scan alive host")

@@ -34,7 +34,7 @@ var allCmd = &cobra.Command{
 }
 
 func init(){
-	allCmd.Flags().StringVarP(&Hosts,"host","H","","Set `hosts`(The format is similar to Nmap)")
+	allCmd.Flags().StringVarP(&Hosts,"host","H","","Set `hosts`(The format is similar to Nmap) or ips.txt file path")
 	allCmd.Flags().StringVarP(&Ports,"ports","P","","Set `ports`(The format is similar to Nmap)")
 	allCmd.Flags().BoolVar(&PingBool,"noping",true,"No use ping to scanner alive host")
 	allCmd.Flags().IntVar(&Runtime,"runtime",100,"Set scanner ants pool thread")
@@ -76,7 +76,9 @@ func allRun(hostString string,portString string,log bool,runtime int,noping bool
 	if len(alive) > 0 {
 		fmt.Println("----- [Yasso] Start do vuln scan -----")
 		VulScan(alive,false,true,false) // 做全扫描
-		fmt.Println("----- [Yasso] Start do port scan -----")
+		if len(alive) != 0 {
+			fmt.Println("----- [Yasso] Start do port scan -----")
+		}
 		PortResults := PortScan(alive,ports)
 		// 获取我们的端口扫描结果，去遍历
 		if len(PortResults) != 0 {

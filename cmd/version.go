@@ -8,7 +8,7 @@ var versionCmd = &cobra.Command{
 	Use: "version",
 	Short: "Print Yasso's version in screen",
 	Run: func(cmd *cobra.Command, args []string) {
-		Println(Clearln + "Yasso Version is 0.1.1")
+		Println(Clearln + "Yasso Version is 0.1.2")
 	},
 }
 

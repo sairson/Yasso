@@ -42,7 +42,7 @@ func init(){
 	WinCmd.Flags().BoolVar(&netbiosflag,"netbios",false,"Set netbios flag and use netbios scan")
 	WinCmd.Flags().BoolVar(&oxidflag,"oxid",false,"Set oxid flag and use oxid scan")
 	WinCmd.Flags().BoolVar(&allflag,"all",true,"Set all flag and use oxid,netbios,smb scan")
-	WinCmd.Flags().StringVarP(&Hosts,"hosts","H","","Set `hosts`(The format is similar to Nmap)")
+	WinCmd.Flags().StringVarP(&Hosts,"hosts","H","","Set `hosts`(The format is similar to Nmap) or ips.txt file path")
 	WinCmd.Flags().DurationVar(&TimeDuration,"time",1 * time.Second,"Set net conn timeout")
 	WinCmd.Flags().StringVar(&ProxyHost,"proxy","","Set socks5 proxy and use it")
 }
@@ -526,7 +526,7 @@ func runall(host []string){
 					return
 				}
 				for _,s := range r {
-					Println(fmt.Sprintf("[+] %v",v))
+					Println(fmt.Sprintf("[NBTBIOS] %v",v))
 					Println(fmt.Sprintf("\t%v",s))
 				}
 			}(v)

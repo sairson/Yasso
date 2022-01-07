@@ -37,7 +37,7 @@ var VulCmd = &cobra.Command{
 }
 
 func init(){
-	VulCmd.Flags().StringVarP(&Hosts,"hosts","H","","Set `hosts`(The format is similar to Nmap)")
+	VulCmd.Flags().StringVarP(&Hosts,"hosts","H","","Set `hosts`(The format is similar to Nmap) or ips.txt file path")
 	VulCmd.Flags().StringVar(&ProxyHost,"proxy","","Set socks5 proxy")
 	VulCmd.Flags().BoolVar(&smbGohstbool,"gs",false,"scan smbghost")
 	VulCmd.Flags().BoolVar(&ms17010bool,"ms",false,"scan ms17010")

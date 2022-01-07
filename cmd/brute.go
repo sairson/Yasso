@@ -33,7 +33,7 @@ var BruteCmd = &cobra.Command{
 
 func init(){
 	// 添加全局变量
-	BruteCmd.PersistentFlags().StringVarP(&Hosts,"hosts","H","","to crack hosts address (crack Must)")
+	BruteCmd.PersistentFlags().StringVarP(&Hosts,"hosts","H","","to crack hosts address or ips.txt path (crack Must)")
 	BruteCmd.PersistentFlags().IntVar(&BrutePort,"port",0,"to crack hosts port (if not set use default)")
 	BruteCmd.PersistentFlags().IntVar(&Runtime,"runtime",100,"set crack thread number")
 	BruteCmd.PersistentFlags().BoolVarP(&BruteFlag,"crack","",false,"make sure to use crack")

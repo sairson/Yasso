@@ -81,7 +81,7 @@ func BruteMysqlByUser(){
 }
 
 func init(){
-	MysqlCmd.Flags().StringVarP(&SQLCommand,"cmd","C","","mysql sql command")
+	MysqlCmd.Flags().StringVarP(&SQLCommand,"cmd","c","","mysql sql command")
 	MysqlCmd.Flags().StringVar(&ConnHost,"hostname","","Remote Connect a Mysql (brute param need false)")
 	MysqlCmd.Flags().StringVar(&LoginUser,"user","","Login ssh username")
 	MysqlCmd.Flags().StringVar(&LoginPass,"pass","","Login ssh password")

@@ -49,7 +49,7 @@ var PortCmd = &cobra.Command{
 
 func init(){
 	PortCmd.Flags().DurationVarP(&TimeDuration,"time","t",500 * time.Millisecond,"Set timeout (eg.) -t 50ms(ns,ms,s,m,h)")
-	PortCmd.Flags().StringVarP(&Hosts,"hosts","H","","Set `hosts`(The format is similar to Nmap)")
+	PortCmd.Flags().StringVarP(&Hosts,"hosts","H","","Set `Set `hosts`(The format is similar to Nmap) or ips.txt file path")
 	PortCmd.Flags().StringVarP(&Ports,"ports","p","","Set `ports`(The format is similar to Nmap)(eg.) 1-2000,3389")
 	PortCmd.Flags().IntVarP(&Runtime,"runtime","r",100,"Set scanner ants pool thread")
 	rootCmd.AddCommand(PortCmd)
