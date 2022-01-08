@@ -1,0 +1,276 @@
+
+[+] Find 192.168.248.1 (ping)
+[+] 192.168.248.1 Find CVE-2020-0796
+[+] 192.168.248.1 139 open
+[+] 192.168.248.1 445 open
+[+] 192.168.248.1 5985 open
+[+] 192.168.248.1 135 open
+[2K[+] 192.168.248.1 brute smb success [administrator:930517]
+[OXID] Hostname LAPTOP-ESQC1EPT Network [192.168.0.3 192.168.23.1 192.168.248.1]
+[+] Find 192.168.248.1 (ping)
+[+] 192.168.248.1 Find CVE-2020-0796
+[+] 192.168.248.1 135 open
+[+] 192.168.248.1 445 open
+[+] 192.168.248.1 139 open
+[+] 192.168.248.1 5985 open
+[2K[+] 192.168.248.1 brute smb success [administrator:930517]
+[OXID] Hostname LAPTOP-ESQC1EPT Network [192.168.0.3 192.168.23.1 192.168.248.1]
+[+] Find 192.168.248.1 (ping)
+[+] 192.168.248.1 Find CVE-2020-0796
+[+] 192.168.248.1 445 open
+[+] 192.168.248.1 135 open
+[+] 192.168.248.1 139 open
+[+] 192.168.248.1 5985 open
+[2K[+] 192.168.248.1 brute smb success [administrator:930517]
+[OXID] Hostname LAPTOP-ESQC1EPT Network [192.168.0.3 192.168.23.1 192.168.248.1]
+[+] Find 192.168.248.1 (ping)
+[+] 192.168.248.1 Find CVE-2020-0796
+[+] 192.168.248.1 135 open
+[+] 192.168.248.1 139 open
+[+] 192.168.248.1 445 open
+[+] 192.168.248.1 5985 open
+[2K[+] 192.168.248.1 brute smb success [administrator:930517]
+[OXID] Hostname LAPTOP-ESQC1EPT Network [192.168.0.3 192.168.23.1 192.168.248.1]
+[+] Find 192.168.248.1 (ping)
+[+] 192.168.248.1 Find CVE-2020-0796
+[+] 192.168.248.1 445 open
+[+] 192.168.248.1 135 open
+[+] 192.168.248.1 5985 open
+[+] 192.168.248.1 139 open
+[2K[+] 192.168.248.1 brute smb success [administrator:930517]
+[+] Find 192.168.248.1 (ping)
+[+] Find 192.168.248.219 (ping)
+[+] 192.168.248.1 Find CVE-2020-0796
+[+] 192.168.248.1 5985 open
+[+] 192.168.248.219 21 open
+[+] 192.168.248.1 445 open
+[+] 192.168.248.1 135 open
+[+] 192.168.248.219 22 open
+[+] 192.168.248.1 139 open
+[+] 192.168.248.219 27017 open
+[+] 192.168.248.219 6379 open
+[+] 192.168.248.219 5432 open
+[2K[+] 192.168.248.1 brute smb success [administrator:930517]
+[+] Find 192.168.248.1 (ping)
+[+] Find 192.168.248.219 (ping)
+[+] 192.168.248.1 Find CVE-2020-0796
+[+] 192.168.248.219 22 open
+[+] 192.168.248.219 21 open
+[+] 192.168.248.219 6379 open
+[+] 192.168.248.1 139 open
+[+] 192.168.248.1 445 open
+[+] 192.168.248.1 5985 open
+[+] 192.168.248.219 27017 open
+[+] 192.168.248.1 135 open
+[+] 192.168.248.219 5432 open
+[2K[+] 192.168.248.1 brute smb success [administrator:930517]
+[2K[+] 192.168.248.219 brute ssh success [kali:kali]
+[2K[+] 192.168.248.219 brute ftp success [kali:kali]
+[2K[+] Mongodb 192.168.248.219 unauthorized
+[2K[+] 192.168.248.219 brute mongodb success [admin:123456]
+[2K[+] Redis 192.168.248.219:6379 unauthorized
+[+] os:[Linux 5.10.0-kali7-amd64 x86_64] path:[] dbfilename:[root] pid:[12186]
+[2K[+] 192.168.248.219 brute postgres success [admin:admin@123]
+[OXID] Hostname LAPTOP-ESQC1EPT Network [192.168.0.3 192.168.23.1 192.168.248.1]
+[+] Find 192.168.248.219 (ping)
+[+] Find 192.168.248.1 (ping)
+[+] Find 192.168.248.212 (ping)
+[+] Find 192.168.248.128 (ping)
+[+] 192.168.248.1 Find CVE-2020-0796
+[+] 192.168.248.212 Find MS17010 (Windows Server 2012 R2 Standard 9600)
+[+] 192.168.248.1 135 open
+[+] 192.168.248.1 139 open
+[+] 192.168.248.219 22 open
+[+] 192.168.248.212 135 open
+[+] 192.168.248.1 445 open
+[+] 192.168.248.212 139 open
+[+] 192.168.248.219 27017 open
+[+] 192.168.248.212 445 open
+[+] 192.168.248.212 80 open
+[+] 192.168.248.128 5985 open
+[+] 192.168.248.1 5985 open
+[+] 192.168.248.219 5432 open
+[+] 192.168.248.212 5985 open
+[+] 192.168.248.128 3389 open
+[+] 192.168.248.212 3389 open
+[+] 192.168.248.219 6379 open
+[+] 192.168.248.219 21 open
+[+] 192.168.248.128 445 open
+[+] 192.168.248.128 139 open
+[+] 192.168.248.128 135 open
+[+] 192.168.248.128 1433 open
+[2K[+] 192.168.248.212 brute smb success [administrator:P@ssw0rd]
+[2K[+] 192.168.248.128 brute winrm success [administrator:930517]
+[2K[+] 192.168.248.128 brute smb success [administrator:930517]
+[2K[+] 192.168.248.128 brute mssql success [sa:admin@123]
+[2K[+] 192.168.248.219 brute ssh success [root:kali]
+[2K[+] 192.168.248.219 brute ssh success [kali:kali]
+[2K[+] 192.168.248.219 brute postgres success [admin:admin@123]
+[2K[+] Mongodb 192.168.248.219 unauthorized
+[2K[+] 192.168.248.219 brute mongodb success [admin:123456]
+[2K[+] Redis 192.168.248.219:6379 unauthorized
+[+] os:[Linux 5.10.0-kali7-amd64 x86_64] path:[] dbfilename:[root] pid:[12186]
+[2K[+] 192.168.248.219 brute ftp success [kali:kali]
+[NBTBIOS] 192.168.248.128
+	OA              U Workstation Service
+	KLION           G Domain Name
+	OA              U Server Service
+[NBTBIOS] 192.168.248.212
+	DC02            U Workstation Service
+	KLION           G Domain Name
+	KLION           G Domain Controllers
+	DC02            U Server Service
+	KLION           U Domain Master Browser
+	-------------------------------------------
+	Windows Server 2012 R2 Standard 9600|Windows Server 2012 R2 Standard 6.3
+	NetBIOS domain name   : KLION
+	NetBIOS computer name : DC02
+	DNS domain name       : klion.local
+	DNS computer name     : Dc02.klion.local
+	DNS tree name         : klion.local
+[SMB] IP 192.168.248.212 [domain: KLION hostname: DC02]
+[OXID] Hostname OA Network [192.168.248.128]
+[OXID] Hostname Dc02 Network [192.168.248.212]
+[OXID] Hostname LAPTOP-ESQC1EPT Network [192.168.0.3 192.168.23.1 192.168.248.1]
+[+] 200 http://192.168.248.212 [IIS]  IIS Windows Server
+[2K[*] Brute Module [rdp]
+[2K[*] Have [user:2] [pass:3] [request:6]
+[2K[*] brute rdp done
+[2K[*] Brute Module [rdp]
+[2K[*] Have [user:2] [pass:3] [request:6]
+[2K[*] brute rdp done
+[2K[*] Brute Module [rdp]
+[2K[*] Have [user:2] [pass:3] [request:6]
+[2K[*] brute rdp done
+[2K[*] Brute Module [rdp]
+[2K[*] Have [user:2] [pass:3] [request:6]
+[2K[*] brute rdp done
+[2K[*] Brute Module [rdp]
+[2K[*] Have [user:2] [pass:3] [request:1536]
+[2K[+] 192.168.248.212 brute rdp success [administrator:P@ssw0rd]
+[2K[+] 192.168.248.128 brute rdp success [administrator:930517]
+[2K[*] brute rdp done
+[2K[*] Brute Module [rdp]
+[2K[*] Have [user:2] [pass:3] [request:6]
+[2K[+] 192.168.248.128 brute rdp success [administrator:930517]
+[2K[*] brute rdp done
+[2K[*] Brute Module [rdp]
+[2K[*] Have [user:2] [pass:3] [request:6]
+[2K[+] 192.168.248.128 brute rdp success [kilon.local\administrator:930517]
+[2K[*] brute rdp done
+[2K[*] Brute Module [rdp]
+[2K[*] Have [user:2] [pass:3] [request:1536]
+[2K[+] 192.168.248.128 brute rdp success [kilon.local\administrator:930517]
+[2K[+] 192.168.248.212 brute rdp success [kilon.local\administrator:P@ssw0rd]
+[2K[*] brute rdp done
+[+] Find 192.168.248.219 (ping)
+[+] Find 192.168.248.1 (ping)
+[+] Find 192.168.248.128 (ping)
+[+] Find 192.168.248.212 (ping)
+[+] 192.168.248.212 Find MS17010 (Windows Server 2012 R2 Standard 9600)
+[+] 192.168.248.1 Find CVE-2020-0796
+[+] 192.168.248.1 139 open
+[+] 192.168.248.1 135 open
+[+] 192.168.248.219 27017 open
+[+] 192.168.248.1 5985 open
+[+] 192.168.248.219 21 open
+[+] 192.168.248.128 135 open
+[+] 192.168.248.219 22 open
+[+] 192.168.248.128 5985 open
+[+] 192.168.248.128 1433 open
+[+] 192.168.248.212 80 open
+[+] 192.168.248.212 3389 open
+[+] 192.168.248.219 6379 open
+[+] 192.168.248.212 139 open
+[+] 192.168.248.212 135 open
+[+] 192.168.248.212 5985 open
+[+] 192.168.248.128 445 open
+[+] 192.168.248.219 5432 open
+[+] 192.168.248.128 3389 open
+[+] 192.168.248.128 139 open
+[+] 192.168.248.212 445 open
+[+] 192.168.248.1 445 open
+[2K[+] Mongodb 192.168.248.219 unauthorized
+[2K[+] 192.168.248.219 brute mongodb success [admin:123456]
+[2K[+] 192.168.248.212 brute smb success [administrator:P@ssw0rd]
+[2K[+] 192.168.248.1 brute smb success [administrator:930517]
+[2K[+] 192.168.248.128 brute winrm success [administrator:930517]
+[2K[+] 192.168.248.128 brute mssql success [sa:admin@123]
+[2K[+] 192.168.248.219 brute ftp success [kali:kali]
+[2K[+] 192.168.248.128 brute smb success [administrator:930517]
+[2K[+] 192.168.248.219 brute ssh success [root:kali]
+[2K[+] Redis 192.168.248.219:6379 unauthorized
+[+] os:[Linux 5.10.0-kali7-amd64 x86_64] path:[] dbfilename:[root] pid:[12186]
+[2K[+] 192.168.248.219 brute postgres success [admin:admin@123]
+[NBTBIOS] 192.168.248.128
+	OA              U Workstation Service
+	KLION           G Domain Name
+	OA              U Server Service
+[NBTBIOS] 192.168.248.212
+	DC02            U Workstation Service
+	KLION           G Domain Name
+	KLION           G Domain Controllers
+	DC02            U Server Service
+	KLION           U Domain Master Browser
+	-------------------------------------------
+	Windows Server 2012 R2 Standard 9600|Windows Server 2012 R2 Standard 6.3
+	NetBIOS domain name   : KLION
+	NetBIOS computer name : DC02
+	DNS domain name       : klion.local
+	DNS computer name     : Dc02.klion.local
+	DNS tree name         : klion.local
+[SMB] IP 192.168.248.212 [domain: KLION hostname: DC02]
+[OXID] Hostname OA Network [192.168.248.128]
+[OXID] Hostname Dc02 Network [192.168.248.212]
+[OXID] Hostname LAPTOP-ESQC1EPT Network [192.168.0.3 192.168.23.1 192.168.248.1]
+[+] 200 http://192.168.248.212 [IIS]  IIS Windows Server
+[+] Find 192.168.1.72 (ping)
+[+] Find 192.168.1.1 (ping)
+[+] 192.168.1.1 8080 open
+[+] 192.168.1.1 80 open
+[+] Find 192.168.248.1 (ping)
+[+] Find 192.168.248.219 (ping)
+[+] 192.168.248.1 Find CVE-2020-0796
+[+] 192.168.248.1 445 open
+[+] 192.168.248.1 139 open
+[+] 192.168.248.1 135 open
+[+] 192.168.248.1 5985 open
+[+] 192.168.248.219 5432 open
+[+] 192.168.248.219 27017 open
+[+] 192.168.248.219 6379 open
+[+] 192.168.248.219 22 open
+[+] 192.168.248.219 21 open
+[+] 192.168.248.219 11211 open
+[2K[+] 192.168.248.1 brute smb success [administrator:930517]
+[2K[+] 192.168.248.219 brute postgres success [admin:admin@123]
+[2K[+] Mongodb 192.168.248.219 unauthorized
+[2K[+] 192.168.248.219 brute mongodb success [admin:123456]
+[2K[+] Redis 192.168.248.219:6379 unauthorized
+[+] os:[Linux 5.10.0-kali7-amd64 x86_64] path:[] dbfilename:[root] pid:[12186]
+[2K[+] 192.168.248.219 brute ssh success [root:kali]
+[2K[+] 192.168.248.219 brute ftp success [kali:kali]
+[+] Memcached 192.168.248.219:11211 unauthorized
+[OXID] Hostname LAPTOP-ESQC1EPT Network [192.168.23.1 192.168.248.1 192.168.0.3]
+[+] Find 192.168.248.219 (ping)
+[+] Find 192.168.248.1 (ping)
+[+] 192.168.248.1 Find CVE-2020-0796
+[+] 192.168.248.1 5985 open
+[+] 192.168.248.219 21 open
+[+] 192.168.248.219 22 open
+[+] 192.168.248.1 139 open
+[+] 192.168.248.1 135 open
+[+] 192.168.248.219 27017 open
+[+] 192.168.248.219 5432 open
+[+] 192.168.248.1 445 open
+[+] 192.168.248.219 6379 open
+[+] 192.168.248.219 11211 open
+[2K[+] Mongodb 192.168.248.219 unauthorized
+[2K[+] 192.168.248.1 brute smb success [administrator:930517]
+[2K[+] 192.168.248.219 brute mongodb success [admin:123456]
+[2K[+] 192.168.248.219 brute ftp success [kali:kali]
+[2K[+] 192.168.248.219 brute ssh success [root:kali]
+[2K[+] 192.168.248.219 brute postgres success [admin:admin@123]
+[2K[+] Redis 192.168.248.219:6379 unauthorized
+[+] os:[Linux 5.10.0-kali7-amd64 x86_64] path:[] dbfilename:[root] pid:[12186]
+[+] Memcached 192.168.248.219:11211 unauthorized
+[OXID] Hostname LAPTOP-ESQC1EPT Network [192.168.23.1 192.168.248.1 192.168.0.3]
