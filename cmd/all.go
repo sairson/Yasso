@@ -12,11 +12,6 @@ import (
 	全体扫描模块
 	将逐步执行每个任务
 */
-
-func printHeader() {
-
-}
-
 var allCmd = &cobra.Command{
 	Use:   "all",
 	Short: "Use all scanner module (.attention)\nSome service not support proxy,You might lose it [*]",
