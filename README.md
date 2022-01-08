@@ -5,7 +5,7 @@
 [English Introduce](README_EN.md)
 
 
-## 介绍 😈a
+## 介绍 😈
 Yasso 将作为一款内网辅助渗透工具集发布，它集合了许多实用功能，来帮助`Red team`成员在内网极端环境下的工具使用以及`Blue team`成员的内网自检,并且程序加入了代理功能以及`ants`的扫描并发，在实现功能的同时追求准确和速度
 
 [![asciicast](https://asciinema.org/a/fBxRVxLJ30eVo0dOz2e9mlAZL.svg)](https://asciinema.org/a/fBxRVxLJ30eVo0dOz2e9mlAZL)
