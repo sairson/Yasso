@@ -37,8 +37,6 @@ func init() {
 }
 
 func allRun(hostString string, portString string, log bool, runtime int, noping bool) {
-	// 先对程序进行ping扫描
-	// 解析hosts
 	var (
 		ips      []string
 		ports    []int
@@ -73,7 +71,6 @@ func allRun(hostString string, portString string, log bool, runtime int, noping 
 			fmt.Println("----- [Yasso] Start do port scan -----")
 		}
 		PortResults := PortScan(alive, ports)
-		// 获取我们的端口扫描结果，去遍历
 		if len(PortResults) != 0 {
 			fmt.Println("----- [Yasso] Start do crack service -----")
 			for _, v := range PortResults {
