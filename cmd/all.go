@@ -74,7 +74,6 @@ func allRun(hostString string, portString string, log bool, runtime int, noping 
 		if len(PortResults) != 0 {
 			fmt.Println("----- [Yasso] Start do crack service -----")
 			for _, v := range PortResults {
-				// 这里做漏洞扫描
 				wg.Add(1)
 				go func(v PortResult) {
 					defer wg.Done()
