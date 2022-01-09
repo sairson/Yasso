@@ -5,7 +5,7 @@ import (
 )
 
 func init() {
-	cmd.CreateLogFile("result.txt")
+	cmd.CreateLogFile("Yasso.log")
 }
 
 func main() {

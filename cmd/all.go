@@ -34,6 +34,9 @@ func init() {
 }
 
 func allRun(hostString string, portString string, log bool, runtime int, noping bool) {
+	defer func() {
+		fmt.Println("[Yasso] scan task is completed")
+	}()
 	var (
 		ips      []string
 		ports    []int
@@ -124,5 +127,4 @@ func allRun(hostString string, portString string, log bool, runtime int, noping 
 		fmt.Println("----- [Yasso] Start do web service scan -----")
 		DisMapScan(alive, webports)
 	}
-	fmt.Println("[Yasso] scan task is completed")
 }

@@ -15,7 +15,7 @@ func Println(s string) {
 		fmt.Println("[!] open log file failed", err)
 		return
 	}
-	file.WriteString("\n" + s)
+	_, _ = file.WriteString("\n" + s)
 }
 
 func CreateLogFile(filename string) {
