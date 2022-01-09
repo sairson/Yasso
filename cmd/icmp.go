@@ -14,9 +14,8 @@ import (
 )
 
 var (
-	tunnel = make(chan string, 20)
-	OS     = runtime.GOOS
-	Alive  []string // 存活的ip列表
+	OS    = runtime.GOOS // 系统架构
+	Alive []string       // 存活的ip列表
 )
 var pingCmd = &cobra.Command{
 	Use:   "ping",
@@ -34,7 +33,7 @@ var pingCmd = &cobra.Command{
 			return
 		}
 		Println(fmt.Sprintf("[Yasso] will ping %d host", len(ips)))
-		_ = execute(ips)
+		_ = execute(ips, RunICMP)
 	},
 }
 
@@ -44,31 +43,26 @@ func init() {
 	rootCmd.AddCommand(pingCmd)
 }
 
-func execute(ips []string) []string {
+func execute(ips []string, r bool) []string {
 	var wg sync.WaitGroup
-
-	go func() {
-		for _, ip := range ips {
-			tunnel <- ip
-		}
-	}()
-	for i := 0; i < len(ips); i++ {
-		wg.Add(1)
-		_ = ants.Submit(func() {
-			ip := <-tunnel
-			if RunICMP == true {
-				if icmp(ip) {
-					Println(fmt.Sprintf("[+] Find %v (icmp)", ip))
-					Alive = append(Alive, ip)
-				}
-			} else {
-				if ping(ip) {
-					Println(fmt.Sprintf("[+] Find %v (ping)", ip))
-					Alive = append(Alive, ip)
-				}
+	// 修改ants池的并发方式
+	p, _ := ants.NewPoolWithFunc(len(ips), func(ip interface{}) {
+		if r == true {
+			if icmp(ip.(string)) {
+				Println(fmt.Sprintf("[+] Find %v (icmp)", ip))
+				Alive = append(Alive, ip.(string))
 			}
-			wg.Done()
-		})
+		} else {
+			if ping(ip.(string)) {
+				Println(fmt.Sprintf("[+] Find %v (ping)", ip))
+				Alive = append(Alive, ip.(string))
+			}
+		}
+		wg.Done()
+	})
+	for _, ip := range ips {
+		wg.Add(1)
+		_ = p.Invoke(ip)
 	}
 	wg.Wait()
 	return Alive

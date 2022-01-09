@@ -33,8 +33,9 @@ var DisMapCmd = &cobra.Command{
 		var ports []int
 		hosts, _ := ResolveIPS(Hosts)
 		var runhosts []string
+
 		if PingBool == true {
-			runhosts = execute(hosts)
+			runhosts = execute(hosts, false)
 		} else {
 			runhosts = hosts
 		}

@@ -48,31 +48,27 @@ func init() {
 func VulScan(ips []string, ms17010bool bool, allbool bool, smbGohstbool bool) {
 	var wg sync.WaitGroup
 
-	go func() {
-		for _, ip := range ips {
-			tunnel <- ip
+	p, _ := ants.NewPoolWithFunc(len(ips), func(ip interface{}) {
+		if ms17010bool == true || allbool == true {
+			Ms17010Conn(config.HostIn{
+				Host:    ip.(string),
+				Port:    445,
+				TimeOut: TimeDuration,
+			})
 		}
-	}()
-	for i := 0; i < len(ips); i++ {
+		if smbGohstbool == true || allbool == true {
+			SmbGhostConn(config.HostIn{
+				Host:    ip.(string),
+				Port:    445,
+				TimeOut: TimeDuration,
+			})
+		}
+		wg.Done()
+	})
+
+	for _, ip := range ips {
 		wg.Add(1)
-		_ = ants.Submit(func() {
-			ip := <-tunnel
-			if ms17010bool == true || allbool == true {
-				Ms17010Conn(config.HostIn{
-					Host:    ip,
-					Port:    445,
-					TimeOut: TimeDuration,
-				})
-			}
-			if smbGohstbool == true || allbool == true {
-				SmbGhostConn(config.HostIn{
-					Host:    ip,
-					Port:    445,
-					TimeOut: TimeDuration,
-				})
-			}
-			wg.Done()
-		})
+		_ = p.Invoke(ip)
 	}
 	wg.Wait()
 }

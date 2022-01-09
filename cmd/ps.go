@@ -61,23 +61,21 @@ func init() {
 func PortScan(host []string, ports []int) []PortResult {
 	var tempPort []PortResult
 	var wg sync.WaitGroup
-	go func() {
-		for _, ip := range host {
-			tunnel <- ip
-		}
-	}()
-	for i := 0; i < len(host); i++ {
-		wg.Add(1)
+
+	p, _ := ants.NewPoolWithFunc(len(host), func(ip interface{}) {
 		_ = ants.Submit(func() {
-			ip := <-tunnel
-			aport := EachScan(ip, ports)
+			aport := EachScan(ip.(string), ports)
 			//Println()(aport)
 			if len(aport) != 0 {
 				// 扫描完成，加入扫描结果队列
-				tempPort = append(tempPort, PortResult{ip, aport})
+				tempPort = append(tempPort, PortResult{ip.(string), aport})
 			} // 将ip赋值给AlivePort*/
 			wg.Done()
 		})
+	})
+	for _, ip := range host {
+		wg.Add(1)
+		_ = p.Invoke(ip)
 	}
 	wg.Wait()
 	return tempPort
