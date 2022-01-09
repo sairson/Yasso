@@ -25,7 +25,8 @@ var allCmd = &cobra.Command{
 func init() {
 	allCmd.Flags().StringVarP(&Hosts, "host", "H", "", "Set `hosts`(The format is similar to Nmap) or ips.txt file path")
 	allCmd.Flags().StringVarP(&Ports, "ports", "P", "", "Set `ports`(The format is similar to Nmap)")
-	allCmd.Flags().BoolVar(&PingBool, "noping", true, "No use ping to scanner alive host")
+	allCmd.Flags().BoolVar(&PingBool, "noping", false, "No use ping to scanner alive host")
+	allCmd.Flags().BoolVar(&RunICMP, "icmp", false, "Use icmp to scanner alive host")
 	allCmd.Flags().IntVar(&Runtime, "runtime", 100, "Set scanner ants pool thread")
 	allCmd.Flags().StringVar(&ProxyHost, "proxy", "", "Set socks5 proxy")
 	allCmd.Flags().DurationVar(&TimeDuration, "time", 1*time.Second, "Set timeout ")
@@ -57,8 +58,9 @@ func allRun(hostString string, portString string, log bool, runtime int, noping 
 	} else {
 		// 执行 ping 操作
 		fmt.Println("----- [Yasso] Start do ping scan -----")
-		alive = execute(ips)
+		alive = execute(ips, RunICMP)
 	}
+	fmt.Println("[Yasoo get alive host] is", len(alive))
 	// 做漏洞扫描
 	if len(alive) > 0 {
 		fmt.Println("----- [Yasso] Start do vuln scan -----")
@@ -122,4 +124,5 @@ func allRun(hostString string, portString string, log bool, runtime int, noping 
 		fmt.Println("----- [Yasso] Start do web service scan -----")
 		DisMapScan(alive, webports)
 	}
+	fmt.Println("[Yasso] scan task is completed")
 }
