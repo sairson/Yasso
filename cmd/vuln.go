@@ -24,7 +24,7 @@ var VulCmd = &cobra.Command{
 			return
 		}
 		if Hosts != "" {
-			ips, _ = ResolveIPS(Hosts) // resolve ip to []string ips
+			ips, _ = ResolveIPS(Hosts)
 		} else {
 			Println("Yasso scanner need a hosts")
 			return
