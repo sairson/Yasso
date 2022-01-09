@@ -41,7 +41,7 @@ func init() {
 	VulCmd.Flags().StringVar(&ProxyHost, "proxy", "", "Set socks5 proxy")
 	VulCmd.Flags().BoolVar(&smbGohstbool, "gs", false, "scan smbghost")
 	VulCmd.Flags().BoolVar(&ms17010bool, "ms", false, "scan ms17010")
-	VulCmd.Flags().BoolVar(&allbool, "all", false, "scan all vuln contains ms17010,smbghost")
+	VulCmd.Flags().BoolVar(&allbool, "all", true, "scan all vuln contains ms17010,smbghost")
 	rootCmd.AddCommand(VulCmd)
 }
 
