@@ -64,7 +64,7 @@ func allRun(hostString string, portString string, log bool, runtime int, noping 
 	// 做漏洞扫描
 	if len(alive) > 0 {
 		fmt.Println("----- [Yasso] Start do vuln scan -----")
-		VulScan(alive, false, true, false) // 做全扫描
+		VulScan(alive, false, true, false) // 做漏洞扫描
 		if len(alive) != 0 {
 			fmt.Println("----- [Yasso] Start do port scan -----")
 		}
