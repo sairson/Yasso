@@ -77,6 +77,8 @@ func ping(ip string) bool {
 		cmd = exec.Command("/bin/bash", "-c", "ping -c 1 -w 1 "+ip+" >/dev/null && echo true || echo false")
 	case "darwin":
 		cmd = exec.Command("/bin/bash", "-c", "ping -c 1 -w 1 "+ip+" >/dev/null && echo true || echo false")
+	default:
+		cmd = exec.Command("/bin/bash", "-c", "ping -c 1 -w 1 "+ip+" >/dev/null && echo true || echo false")
 	}
 	info := bytes.Buffer{}
 	cmd.Stdout = &info
