@@ -82,33 +82,33 @@ func allRun(hostString string, portString string, log bool, runtime int, noping 
 						switch p {
 						case 21:
 							users, pass := ReadTextToDic("ftp", UserDic, PassDic)
-							burpTask(v.IP, "ftp", users, pass, p, 100, 1*time.Second, "", false)
+							burpTask(v.IP, "ftp", users, pass, p, runtime, 1*time.Second, "", false)
 						case 22:
 							users, pass := ReadTextToDic("ssh", UserDic, PassDic)
-							burpTask(v.IP, "ssh", users, pass, p, 100, 1*time.Second, "", false)
+							burpTask(v.IP, "ssh", users, pass, p, runtime, 1*time.Second, "", false)
 						case 3306:
 							users, pass := ReadTextToDic("mysql", UserDic, PassDic)
-							burpTask(v.IP, "mysql", users, pass, p, 100, 1*time.Second, "", false)
+							burpTask(v.IP, "mysql", users, pass, p, runtime, 1*time.Second, "", false)
 						case 6379:
 							_, _, _ = RedisUnAuthConn(config.HostIn{Host: v.IP, Port: p, TimeOut: 1 * time.Second}, "test", "test")
 							users, pass := ReadTextToDic("redis", UserDic, PassDic)
-							burpTask(v.IP, "redis", users, pass, p, 100, 5*time.Second, "", false)
+							burpTask(v.IP, "redis", users, pass, p, runtime, 5*time.Second, "", false)
 						case 1433:
 							users, pass := ReadTextToDic("mssql", UserDic, PassDic)
-							burpTask(v.IP, "mssql", users, pass, p, 100, 1*time.Second, "", false)
+							burpTask(v.IP, "mssql", users, pass, p, runtime, 1*time.Second, "", false)
 						case 5432:
 							users, pass := ReadTextToDic("postgres", UserDic, PassDic)
-							burpTask(v.IP, "postgres", users, pass, p, 100, 1*time.Second, "", false)
+							burpTask(v.IP, "postgres", users, pass, p, runtime, 1*time.Second, "", false)
 						case 27017:
 							_, _ = MongoUnAuth(config.HostIn{Host: v.IP, Port: p, TimeOut: 1 * time.Second}, "test", "test")
 							users, pass := ReadTextToDic("mongodb", UserDic, PassDic)
-							burpTask(v.IP, "mongodb", users, pass, p, 100, 1*time.Second, "", false)
+							burpTask(v.IP, "mongodb", users, pass, p, runtime, 1*time.Second, "", false)
 						case 445:
 							users, pass := ReadTextToDic("smb", UserDic, PassDic)
-							burpTask(v.IP, "smb", users, pass, p, 100, 1*time.Second, "", false)
+							burpTask(v.IP, "smb", users, pass, p, runtime, 1*time.Second, "", false)
 						case 5985:
 							users, pass := ReadTextToDic("rdp", UserDic, PassDic) // winrm与本地rdp认证相同
-							burpTask(v.IP, "winrm", users, pass, p, 100, 1*time.Second, "", false)
+							burpTask(v.IP, "winrm", users, pass, p, runtime, 1*time.Second, "", false)
 						case 11211:
 							//memcached 未授权
 							_, _ = MemcacheConn(config.HostIn{Host: v.IP, Port: p, TimeOut: 1 * time.Second})
