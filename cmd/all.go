@@ -16,7 +16,6 @@ var allCmd = &cobra.Command{
 			_ = cmd.Help()
 			return
 		}
-
 		allRun(Hosts, Ports, LogBool, Runtime, PingBool)
 		return
 	},

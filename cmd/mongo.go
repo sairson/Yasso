@@ -29,7 +29,7 @@ func BruteMongoByUser() {
 	}
 	var ips []string
 	var err error
-	if Hosts != "" {
+	if Hosts != "" && ConnHost == "" {
 		ips, err = ResolveIPS(Hosts)
 		if err != nil {
 			Println(fmt.Sprintf("resolve hosts address failed %v", err))
@@ -47,7 +47,7 @@ func BruteMongoByUser() {
 	}
 }
 
-func MongoAuth(info config.HostIn, user, pass string) (bool, error) {
+func MongoAuth(info config.HostIn, user, pass string) (*mgo.Session, bool, error) {
 
 	conf := &mgo.DialInfo{
 		Dial: func(addr net.Addr) (net.Conn, error) {
@@ -66,13 +66,13 @@ func MongoAuth(info config.HostIn, user, pass string) (bool, error) {
 	if err == nil {
 		err = db.Ping()
 		if err != nil {
-			return false, err
+			return nil, false, err
 		}
-		defer db.Close()
-		return true, nil
+		//defer db.Close()
+		return db, true, nil
 
 	}
-	return false, err
+	return nil, false, err
 }
 
 func MongoUnAuth(info config.HostIn, user, pass string) (bool, error) {
@@ -119,4 +119,18 @@ func MongoUnAuth(info config.HostIn, user, pass string) (bool, error) {
 		}
 	}
 	return flag, nil
+}
+
+func MongodbExec(session *mgo.Session) (string, error) {
+	var s string
+	dbs, err := session.DatabaseNames()
+	for _, db := range dbs {
+		if collections, err := session.DB(db).CollectionNames(); err == nil {
+			s += fmt.Sprintf("%s %v\n", db, collections)
+		}
+	}
+	if err != nil {
+		return "", err
+	}
+	return s, nil
 }

