@@ -22,6 +22,7 @@ func init() {
 	DisMapCmd.Flags().StringVar(&ProxyHost, "proxy", "", "Set socks5 proxy and use it ")
 }
 
+var lock sync.Mutex
 var DisMapCmd = &cobra.Command{
 	Use:   "webscan",
 	Short: "Use dismap module discover Web fingerprints (support proxy)",
@@ -60,12 +61,23 @@ func DisMapScan(host []string, ports []int) {
 	var wg sync.WaitGroup
 	for _, ip := range host {
 		wg.Add(1)
-		EachDisMap(ip, ports, &wg)
+		EachDisMap(ip, ports, &wg, nil)
 	}
 	wg.Wait()
 }
 
-func EachDisMap(host string, ports []int, w *sync.WaitGroup) {
+func DisMapScanJson(in *[]JsonOut, ports []int) (out []JsonOut) {
+	var wg sync.WaitGroup
+	for _, v := range *in {
+		wg.Add(1)
+		s := EachDisMap(v.Host, ports, &wg, &v)
+		out = append(out, s)
+	}
+	wg.Wait()
+	return out
+}
+
+func EachDisMap(host string, ports []int, w *sync.WaitGroup, v *JsonOut) JsonOut {
 	defer w.Done()
 	var wg sync.WaitGroup
 	// 计算一个协程需要扫描多少端口
@@ -94,26 +106,29 @@ func EachDisMap(host string, ports []int, w *sync.WaitGroup) {
 	for i := 1; i <= thread; i++ {
 		wg.Add(1)
 		tmp := all[i]
-		go func() {
+		go func(out *JsonOut) {
 			defer wg.Done()
 			// 1,2  2,3
 			//Println(i,thread)
 			for _, port := range tmp {
 				// 遍历每一个端口列表
-				DisMapConn(host, port)
+				DisMapConn(host, port, v)
 			}
-
-		}()
+		}(v)
 	}
 	wg.Wait()
+	return *v
 }
 
-func DisMapConn(host string, port int) bool {
+func DisMapConn(host string, port int, out *JsonOut) bool {
 
 	url := ParseUrl(host, strconv.Itoa(port))
 	for _, r := range Identify(url, TimeDuration) {
 		if r.RespCode != "" {
+			lock.Lock()
+			out.WebHosts = append(out.WebHosts, fmt.Sprintf("%v %v %v %v", r.RespCode, r.Url, r.Result, r.Title))
 			Println(fmt.Sprintf("[+] %v %v %v %v", r.RespCode, r.Url, r.Result, r.Title))
+			lock.Unlock()
 		}
 	}
 	return true

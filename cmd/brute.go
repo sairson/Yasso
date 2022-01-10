@@ -102,7 +102,7 @@ func SwitchBurp(service string, users []string, pass []string, hosts []string, p
 		wg.Add(1)
 		_ = ants.Submit(func() {
 			ip := <-tunnel
-			burpTask(ip, service, users, pass, port, thread, timeout, Domain, true)
+			burpTask(ip, service, users, pass, port, thread, timeout, Domain, true, false, nil)
 			wg.Done()
 		})
 	}
@@ -116,7 +116,7 @@ func SwitchBurp(service string, users []string, pass []string, hosts []string, p
 * 从新计算爆破方式，之前的爆破是采用分割user进行的，但是发现，user数量会远少于password，所以按照password进行分割
  */
 
-func burpTask(host, service string, users []string, pass []string, port int, thread int, timeout time.Duration, Domain string, run bool) {
+func burpTask(host, service string, users []string, pass []string, port int, thread int, timeout time.Duration, Domain string, run bool, jsonbool bool, out *JsonOut) {
 	var t int
 	var wg sync.WaitGroup
 	if len(pass) <= thread {
@@ -165,7 +165,7 @@ func burpTask(host, service string, users []string, pass []string, port int, thr
 						p = strings.ReplaceAll(p, "{user}", p)
 					}
 					result := BurpCall(BurpModule, service, config.HostIn{Host: host, Port: port, TimeOut: time.Duration(timeout), Domain: Domain}, u, p)
-					burpStatus(result, service, host, Domain, u, p)
+					burpStatus(result, service, host, Domain, u, p, jsonbool, out)
 				}
 			}
 			wg.Done()
@@ -174,7 +174,8 @@ func burpTask(host, service string, users []string, pass []string, port int, thr
 	wg.Wait()
 }
 
-func burpStatus(result []reflect.Value, service, host, domain, user, pass string) {
+func burpStatus(result []reflect.Value, service, host, domain, user, pass string, jsonbool bool, out *JsonOut) {
+	var lock sync.Mutex
 	// 这里是判断类型并返回结果的函数
 	if len(result) > 0 {
 		for _, v := range result {
@@ -183,6 +184,12 @@ func burpStatus(result []reflect.Value, service, host, domain, user, pass string
 				if v.Bool() == true {
 					if domain != "" {
 						domain = domain + "\\"
+					}
+					if jsonbool == true {
+						// 加锁
+						lock.Lock()
+						out.WeakPass = append(out.WeakPass, map[string]map[string]string{service: {user: pass}})
+						lock.Unlock()
 					}
 					Println(fmt.Sprintf(Clearln+`[+] %s brute %s success [%v%s:%s]`, host, service, domain, user, pass))
 				}

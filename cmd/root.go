@@ -13,7 +13,7 @@ var (
 	RunICMP        bool          // 是否执行ICMP
 	Ports          string        // 需要解析的端口
 	Runtime        int           // 运行的线程
-	LogBool        bool          // 是否使用日志
+	JsonBool       bool          // 是否使用日志
 	PingBool       bool          // 是否执行ping操作
 	UserDic        string        // 爆破的用户名路径
 	PassDic        string        // 爆破的密码路径
