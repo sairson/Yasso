@@ -91,7 +91,10 @@ func RequestMs17010(conn net.Conn, ip string) (bool, error) {
 	treeConnectRequest[32] = userID[0]
 	treeConnectRequest[33] = userID[1]
 	// TODO change the ip in tree path though it doesn't matter
-	conn.Write(treeConnectRequest)
+	_, err = conn.Write(treeConnectRequest)
+	if err != nil {
+		return false, err
+	}
 
 	if n, err := conn.Read(reply); err != nil || n < 36 {
 		return false, err
