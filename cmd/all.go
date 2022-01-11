@@ -10,7 +10,7 @@ import (
 
 var allCmd = &cobra.Command{
 	Use:   "all",
-	Short: "Use all scanner module (.attention)\nSome service not support proxy,You might lose it [*]",
+	Short: "Use all scanner module (.attention) Some service not support proxy,You might lose it [*]",
 	Run: func(cmd *cobra.Command, args []string) {
 		if Hosts == "" {
 			_ = cmd.Help()

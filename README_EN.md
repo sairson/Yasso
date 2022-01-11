@@ -6,7 +6,10 @@
 
 ## Introduce😈
 
-Yasso will be released as an Intranet assisted penetration tool set, which brings together a number of utility features to help Red Team members use tools in extreme Intranet environments, as well as Intranet self-check for Blue Team members. It also adds proxy functionality and scan concurrency for ants. In the realization of functions at the same time the pursuit of accuracy and speed.
+Yasso will be released as an Intranet assisted penetration tool set, which brings together a number of utility features
+to help Red Team members use tools in extreme Intranet environments, as well as Intranet self-check for Blue Team
+members. It also adds proxy functionality and scan concurrency for ants. In the realization of functions at the same
+time the pursuit of accuracy and speed.
 
 [![asciicast](https://asciinema.org/a/fBxRVxLJ30eVo0dOz2e9mlAZL.svg)](https://asciinema.org/a/fBxRVxLJ30eVo0dOz2e9mlAZL)
 
@@ -16,7 +19,8 @@ The format is
 Yasso [模块] [参数1] [参数2] [参数...]
 ```
 
-In the module, 'Flag' represents the parameters of the current command, and 'Global Flags' represents the Global parameters (all commands can be used).
+In the module, 'Flag' represents the parameters of the current command, and 'Global Flags' represents the Global
+parameters (all commands can be used).
 
 ## Program function module 👻
 
@@ -26,7 +30,8 @@ In the module, 'Flag' represents the parameters of the current command, and 'Glo
 
 Currently available functional modules:
 
-<b>ALL module: full scan mode of calling all modules, faster and more powerful, perfect combination of ants and concurrency</b>
+<b>ALL module: full scan mode of calling all modules, faster and more powerful, perfect combination of ants and
+concurrency</b>
 
 ```
 Usage:
@@ -41,8 +46,8 @@ Flags:
       --runtime int     Set scanner ants pool thread (default 100)
       --time duration   Set timeout  (default 1s)
 ```
-<b>Ping module: ordinary user can call system ping, root can choose to use ICMP packet</b>
 
+<b>Ping module: ordinary user can call system ping, root can choose to use ICMP packet</b>
 
 ```
 Use ping or icmp to scanner alive host
@@ -56,6 +61,7 @@ Flags:
 -H, --host hosts Set hosts(The format is similar to Nmap)
 -i, --icmp Icmp packets are sent to check whether the host is alive(need root)
 ```
+
 <b>Crack module: Powerful blasting module and utilizing toolset - sub-toolset</b>
 
 ```
@@ -84,7 +90,8 @@ Flags:
       --ud string          user dic path (.eg) user.txt
 ```
 
-The program is mainly divided into a number of sub-command functions, each function is annotated in detail, here is a detailed introduction of sub-functions
+The program is mainly divided into a number of sub-command functions, each function is annotated in detail, here is a
+detailed introduction of sub-functions
 
 <details>
 <summary>ftp FTP service blowing module - support SOcks5 proxy</summary>
@@ -103,6 +110,7 @@ Global Flags:
       --timeout duration   crack module timeout(.eg) 1s (ns,ms,s,m,h) (default 1s)
       --ud string          user dic path (.eg) user.txt
 ```
+
 </details>
 
 <details>
@@ -123,6 +131,7 @@ Global Flags:
       --timeout duration   crack module timeout(.eg) 1s (ns,ms,s,m,h) (default 1s)
       --ud string          user dic path (.eg) user.txt
 ```
+
 </details>
 
 <details>
@@ -143,6 +152,7 @@ Global Flags:
       --timeout duration   crack module timeout(.eg) 1s (ns,ms,s,m,h) (default 1s)
       --ud string          user dic path (.eg) user.txt
 ```
+
 </details>
 
 <details>
@@ -162,6 +172,7 @@ Global Flags:
       --timeout duration   crack module timeout(.eg) 1s (ns,ms,s,m,h) (default 1s)
       --ud string          user dic path (.eg) user.txt
 ```
+
 </details>
 
 <details>
@@ -192,6 +203,7 @@ Global Flags:
       --timeout duration   crack module timeout(.eg) 1s (ns,ms,s,m,h) (default 1s)
       --ud string          user dic path (.eg) user.txt
 ```
+
 </details>
 
 <details>
@@ -216,6 +228,7 @@ Global Flags:
       --timeout duration   crack module timeout(.eg) 1s (ns,ms,s,m,h) (default 1s)
       --ud string          user dic path (.eg) user.txt
 ```
+
 </details>
 
 <details>
@@ -235,6 +248,7 @@ Global Flags:
       --timeout duration   crack module timeout(.eg) 1s (ns,ms,s,m,h) (default 1s)
       --ud string          user dic path (.eg) user.txt
 ```
+
 </details>
 
 
@@ -259,6 +273,7 @@ Global Flags:
       --timeout duration   crack module timeout(.eg) 1s (ns,ms,s,m,h) (default 1s)
       --ud string          user dic path (.eg) user.txt
 ```
+
 </details>
 
 <details>
@@ -278,6 +293,7 @@ Global Flags:
       --timeout duration   crack module timeout(.eg) 1s (ns,ms,s,m,h) (default 1s)
       --ud string          user dic path (.eg) user.txt
 ```
+
 </details>
 
 
@@ -303,6 +319,7 @@ Global Flags:
       --timeout duration   crack module timeout(.eg) 1s (ns,ms,s,m,h) (default 1s)
       --ud string          user dic path (.eg) user.txt
 ```
+
 </details>
 
 
@@ -329,6 +346,7 @@ Global Flags:
       --timeout duration   crack module timeout(.eg) 1s (ns,ms,s,m,h) (default 1s)
       --ud string          user dic path (.eg) user.txt
 ```
+
 </details>
 
 
@@ -379,7 +397,8 @@ Flags:
   -t, --time duration   Set timeout (eg.) -t 50ms(ns,ms,s,m,h) (default 1s)
 ```
 
-<b>winscan module: Windows host netBIOS recognition, OXID network card discovery, SMB host fingerprint - support SOcks5 proxy</b>
+<b>winscan module: Windows host netBIOS recognition, OXID network card discovery, SMB host fingerprint - support SOcks5
+proxy</b>
 
 ```
 netbios、smb、oxid scan
@@ -401,13 +420,15 @@ Flags:
 ## Example👿
 
 Scan service invocation for the ALL module
+
 ```
 Yasso. Exe all - 192.168.248.1/24 H
 ```
+
 ![image](https://user-images.githubusercontent.com/74412075/148240369-14cc4c77-e4f8-4fd1-8faa-e716852d3ed8.png)
 
-
 MSSQL commands perform powerlifting and WarSQLKit -CLR Rookit install and uninstall the powerlifting function
+
 ```
 Yasso.exe crack MSSQL --user sa --pass "admin@123" -c whoami --hostname 192.168.248.128
 Yasso.exe crack MSSQL --user sa --pass "admin@123" -c whoami --hostname 192.168.248.128 --method 2
@@ -416,29 +437,37 @@ Yasso.exe crack MSSQL --hostname 192.168.248.128 --user sa --pass "admin@123" --
 Yasso.exe crack MSSQL --hostname 192.168.248.128 --user sa --pass "admin@123" -- CLD "whoami"
 Yasso.exe crack MSSQL --user sa --pass "admin@123" -c whoami --hostname 192.168.248.128 --unkit 1
 ```
+
 ![image](https://user-images.githubusercontent.com/74412075/148234003-8e2ceb59-95c5-4fc3-ad65-501294ddce6b.png)
 
 Winrm command execution and interactive shell
+
 ```
 Yasso.exe crack winrm --hostname 192.168.248.128 -c "ipconfig /all" --pass "930517" --user "administrator"
 ```
+
 ![image](https://user-images.githubusercontent.com/74412075/148234337-80fabcef-a333-402d-8e97-e694b89119c0.png)
+
 ```
 Yasso. Exe crack winrm --hostname 192.168.248.128 --shell --pass "930517" --user "administrator"
 ```
+
 ![image](https://user-images.githubusercontent.com/74412075/148234486-037aaf56-fe11-40a0-9781-82b537ef9a37.png)
 
 grdp's powerful blasting function
+
 ```
 Yasso. Exe crack GRDP --domain "kilon.local" -- pd.\ pass. TXT -- ud.\ user. TXT -h 192.168.248.129/24 --crack
 ```
+
 ![image](https://user-images.githubusercontent.com/74412075/148234733-fbdc34e7-c73e-49f7-8942-3a1863915213.png)
 ssh interactive login
+
 ```
 Yasso.exe crack SSH --hostname 192.168.248.219 --user root --pass kali
 ```
-![image](https://user-images.githubusercontent.com/74412075/148235003-a72116d3-df9b-4b4e-9523-21d5f8b30e1b.png)
 
+![image](https://user-images.githubusercontent.com/74412075/148235003-a72116d3-df9b-4b4e-9523-21d5f8b30e1b.png)
 
 ## Tool advantages 🤡
 
@@ -446,7 +475,8 @@ Yasso.exe crack SSH --hostname 192.168.248.219 --user root --pass kali
 
 - A large collection of commonly used features, making Yasso not like a regular scanner, but rather a toolset
 
-- Powerful SQL penetration assist functions, providing common Redis, mysql, MSSQL databases such as one key weight and database operations
+- Powerful SQL penetration assist functions, providing common Redis, mysql, MSSQL databases such as one key weight and
+  database operations
 
 - Powerful concurrent blasting, allowing larger dictionaries to gain faster speed
 
@@ -454,13 +484,21 @@ Yasso.exe crack SSH --hostname 192.168.248.219 --user root --pass kali
 
 ## Disclaimer 🧐
 
-This tool is only applicable to enterprise security construction activities legally authorized by. If you need to test the usability of this tool, please build a target machine environment by yourself.
+This tool is only applicable to enterprise security construction activities legally authorized by. If you need to test
+the usability of this tool, please build a target machine environment by yourself.
 
-When using this tool for testing, ensure that you comply with local laws and regulations and that you have obtained sufficient authorization. <b>It is important not to scan unauthorized targets</b>
-If you have any illegal behavior during the use of the tool, you shall bear the corresponding consequences by yourself, and we will not assume any legal and joint liability.
-Before installing and using this tool, please <b>carefully read and fully understand the contents of each clause </b>. Restrictions, disclaimers or other clauses related to your significant rights and interests may be highlighted in bold or underlined forms. Do not install and use this tool unless you have fully read, fully understand and accept all terms of this agreement. Your use of this Agreement or your acceptance of this Agreement in any other way, express or implied, shall be deemed that you have read and agreed to be bound by this Agreement.
+When using this tool for testing, ensure that you comply with local laws and regulations and that you have obtained
+sufficient authorization. <b>It is important not to scan unauthorized targets</b>
+If you have any illegal behavior during the use of the tool, you shall bear the corresponding consequences by yourself,
+and we will not assume any legal and joint liability. Before installing and using this tool, please <b>carefully read
+and fully understand the contents of each clause </b>. Restrictions, disclaimers or other clauses related to your
+significant rights and interests may be highlighted in bold or underlined forms. Do not install and use this tool unless
+you have fully read, fully understand and accept all terms of this agreement. Your use of this Agreement or your
+acceptance of this Agreement in any other way, express or implied, shall be deemed that you have read and agreed to be
+bound by this Agreement.
 
 ## Tool writing reference link 👀
+
 ```
 https://github.com/shadow1ng/fscan
 https://github.com/k8gege/LadonGo

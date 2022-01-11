@@ -52,13 +52,13 @@ func resolveIP(ip string) ([]string, error) {
 	var err error
 	switch footmark {
 	case "24":
-		var ip3 = strings.Join(strings.Split(ip[:len(ip)], ".")[0:3], ".")
+		var ip3 = strings.Join(strings.Split(ip[:], ".")[0:3], ".")
 		for i := 0; i <= 255; i++ {
 			temp = append(temp, ip3+"."+strconv.Itoa(i))
 		}
 		err = nil
 	case "16":
-		var ip2 = strings.Join(strings.Split(ip[:len(ip)], ".")[0:2], ".")
+		var ip2 = strings.Join(strings.Split(ip[:], ".")[0:2], ".")
 		for i := 0; i <= 255; i++ {
 			for j := 0; j <= 255; j++ {
 				temp = append(temp, ip2+"."+strconv.Itoa(i)+"."+strconv.Itoa(j))
