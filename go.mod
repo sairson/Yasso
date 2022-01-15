@@ -6,6 +6,7 @@ require (
 	github.com/cheggaaa/pb/v3 v3.0.8
 	github.com/denisenkom/go-mssqldb v0.11.0
 	github.com/go-sql-driver/mysql v1.6.0
+	github.com/godror/godror v0.30.1
 	github.com/huin/asn1ber v0.0.0-20120622192748-af09f62e6358 // indirect
 	github.com/jlaffaye/ftp v0.0.0-20211117213618-11820403398b
 	github.com/lib/pq v1.10.4

@@ -51,6 +51,9 @@ func FtpConn(info config.HostIn, user, pass string) (bool, error) {
 	if err == nil {
 		err = conn.Login(user, pass)
 		if err == nil {
+			if pass == "" {
+				Println(fmt.Sprintf("ftp %v unauthorized", fmt.Sprintf("%v:%v", info.Host, info.Port)))
+			}
 			flag = true
 		}
 	}

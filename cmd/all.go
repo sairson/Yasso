@@ -90,6 +90,14 @@ func allRun(hostString string, portString string, jsonbool bool, runtime int, no
 						switch p {
 						case 21:
 							users, pass := ReadTextToDic("ftp", UserDic, PassDic)
+							// add ftp "" pass
+							flag, _ := FtpConn(config.HostIn{Host: v.IP, Port: p, TimeOut: TimeDuration}, "anonymous", "")
+							if flag == true {
+								if flag == true && jsonbool == true {
+									one.WeakPass = append(one.WeakPass, map[string]map[string]string{"ftp": {"anonymous": "null"}})
+								}
+								continue
+							}
 							burpTask(v.IP, "ftp", users, pass, p, runtime, TimeDuration, "", false, jsonbool, &one)
 						case 22:
 							users, pass := ReadTextToDic("ssh", UserDic, PassDic)

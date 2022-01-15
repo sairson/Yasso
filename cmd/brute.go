@@ -153,7 +153,6 @@ func burpTask(host, service string, users []string, pass []string, port int, thr
 	if service == "mongodb" && run == true {
 		BurpCall(BurpModule, "unmongodb", config.HostIn{Host: host, Port: BrutePort, TimeOut: TimeDuration}, "test", "test")
 	}
-
 	//Println()(all,num,t)
 	for i := 1; i <= t; i++ {
 		wg.Add(1)
