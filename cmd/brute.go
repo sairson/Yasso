@@ -85,6 +85,7 @@ func BurpCall(EncryptMap map[string]interface{}, name string, params ...interfac
 		args[k] = reflect.ValueOf(param)
 	}
 	//Println()(args)
+	//fmt.Println(args)
 	return f.Call(args) // 调用函数并返回结果
 }
 
@@ -209,6 +210,11 @@ func Readiness(file *os.File) []string {
 			return readiness
 		}
 		str := strings.TrimSpace(string(data))
+		// 修复读取时出现空的导致抛出panic
+		if str == "" {
+			continue
+		}
+
 		readiness = append(readiness, str) /*将去除换行符的字符串写入切片*/
 	}
 	return readiness
@@ -219,7 +225,15 @@ func ReadTextToDic(service, user, pass string) ([]string, []string) {
 		userdic = config.Userdict[service]
 		passdic = config.Passwords
 	)
-	if user != "" {
+	// 入过不包含.txt的话，按照用户名和密码来算。其中
+	if !strings.Contains(user, ".txt") {
+		userdic = strings.Split(user, ",")
+	}
+	if !strings.Contains(pass, ".txt") {
+		passdic = strings.Split(pass, ",")
+	}
+
+	if user != "" && strings.Contains(user, ".txt") {
 		userive, err := os.Open(user)
 		if err != nil {
 			Println(fmt.Sprintf(Clearln+"[ERROR] Open %s is failed,please check your user dic path", UserDic))
@@ -227,7 +241,7 @@ func ReadTextToDic(service, user, pass string) ([]string, []string) {
 		}
 		userdic = Readiness(userive)
 	}
-	if pass != "" {
+	if pass != "" && strings.Contains(pass, ".txt") {
 		passive, err := os.Open(pass)
 		if err != nil {
 			Println(fmt.Sprintf(Clearln+"[ERROR] Open %s is failed,please check your pass dic path", PassDic))

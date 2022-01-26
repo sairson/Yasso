@@ -48,6 +48,7 @@ func BruteSshByUser() {
 		}
 		if BruteFlag == true {
 			users, pass := ReadTextToDic("ssh", UserDic, PassDic)
+			fmt.Println(users, pass)
 			Println(Clearln + "[*] Brute Module [ssh]")
 			Println(fmt.Sprintf(Clearln+"[*] Have [user:%v] [pass:%v] [request:%v]", len(users), len(pass), len(users)*len(pass)*len(ips)))
 			SwitchBurp("ssh", users, pass, ips, BrutePort, Runtime, TimeDuration, "")
