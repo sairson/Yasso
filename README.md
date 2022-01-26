@@ -25,6 +25,11 @@ Yasso [模块] [参数1] [参数2] [参数...]
 
 ![image](https://user-images.githubusercontent.com/74412075/148518267-4f72e048-6aee-4ba6-b67d-a447468f2807.png)
 
+2022年1月26日更新 crack 模块中 --ud --pass参数指定，由原本的字典变为字典和用户名指定模式（--ud "administrator,Oadmin" --pd "123456,11223"） 
+
+![image](https://user-images.githubusercontent.com/74412075/151147036-3aa34477-327b-44ef-a633-0504d40b855a.png)
+
+
 目前已有用功能模块 :
 
 <b>all模块: 调用全部模块的完全扫描方式，速度更快，能力更强，ants与并发的完美结合</b>
