@@ -1,5 +1,10 @@
 <h1>👾 Yasso - 亚索 👾</h1>
 
+建议git下来自己编译，编译命令
+```
+go build -x -v -ldflags "-s -w"
+```
+
 ![go](https://img.shields.io/badge/Go-1.16.4-blue)
 
 [English Introduce](README_EN.md)
