@@ -164,8 +164,12 @@ func burpTask(host, service string, users []string, pass []string, port int, thr
 					if strings.Contains(p, "{user}") {
 						p = strings.ReplaceAll(p, "{user}", p)
 					}
-					result := BurpCall(BurpModule, service, config.HostIn{Host: host, Port: port, TimeOut: time.Duration(timeout), Domain: Domain}, u, p)
-					burpStatus(result, service, host, Domain, u, p, jsonbool, out)
+					if u == "" || p == "" {
+						continue
+					} else {
+						result := BurpCall(BurpModule, service, config.HostIn{Host: host, Port: port, TimeOut: time.Duration(timeout), Domain: Domain}, u, p)
+						burpStatus(result, service, host, Domain, u, p, jsonbool, out)
+					}
 				}
 			}
 			wg.Done()
@@ -226,10 +230,10 @@ func ReadTextToDic(service, user, pass string) ([]string, []string) {
 		passdic = config.Passwords
 	)
 	// 入过不包含.txt的话，按照用户名和密码来算。其中
-	if !strings.Contains(user, ".txt") {
+	if user != "" && !strings.Contains(user, ".txt") {
 		userdic = strings.Split(user, ",")
 	}
-	if !strings.Contains(pass, ".txt") {
+	if pass != "" && !strings.Contains(pass, ".txt") {
 		passdic = strings.Split(pass, ",")
 	}
 
