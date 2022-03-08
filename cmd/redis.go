@@ -147,7 +147,7 @@ func RedisUnAuthConn(info config.HostIn, user, pass string) (net.Conn, bool, err
 	if strings.Contains(reply, "redis_version") {
 		flag = true
 		conf := RedisInfo(conn, reply)
-		Println(fmt.Sprintf(Clearln+"[+] Redis %s:%v unauthorized\n[+] os:[%v] path:[%v] dbfilename:[%v] pid:[%v]", info.Host, info.Port, conf.OS, conf.ConfigPath, conf.DbFileName, conf.PID))
+		Println(fmt.Sprintf("%v[+] Redis %s:%v unauthorized dbfilename:[%v] ", Clearln, info.Host, info.Port, conf.DbFileName))
 	}
 	return conn, flag, nil
 }
@@ -176,10 +176,10 @@ func RedisReply(conn net.Conn) (string, error) {
 func RedisInfo(conn net.Conn, reply string) RedisConfig {
 	var (
 		// 第0个是#Server
-		version    = strings.Split(strings.Split(reply, "\r\n")[2], ":")[1]  // redis version
-		os         = strings.Split(strings.Split(reply, "\r\n")[7], ":")[1]  // os
-		pid        = strings.Split(strings.Split(reply, "\r\n")[11], ":")[1] // redis pid
-		install    = strings.Split(strings.Split(reply, "\r\n")[18], ":")[1]
+		//version    = strings.Split(strings.Split(reply, "\r\n")[2], ":")[1]  // redis version
+		//os         = strings.Split(strings.Split(reply, "\r\n")[7], ":")[1]  // os
+		//pid        = strings.Split(strings.Split(reply, "\r\n")[11], ":")[1] // redis pid
+		//install    = strings.Split(strings.Split(reply, "\r\n")[18], ":")[1]
 		dbfilename string
 	)
 	// 读取filename
@@ -199,10 +199,10 @@ func RedisInfo(conn net.Conn, reply string) RedisConfig {
 	}
 
 	var redisConfig = RedisConfig{
-		Version:    version,
-		OS:         os,
-		PID:        pid,
-		ConfigPath: install,
+		//Version:    version,
+		//OS:         os,
+		//PID:        pid,
+		//ConfigPath: install,
 		DbFileName: dbfilename,
 	}
 	//Println()(redisConfig)
