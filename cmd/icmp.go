@@ -47,13 +47,25 @@ func execute(ips []string, r bool) []string {
 	var wg sync.WaitGroup
 	// 修改ants池的并发方式
 	p, _ := ants.NewPoolWithFunc(len(ips), func(ip interface{}) {
+		var ipt string
 		if r == true {
-			if icmp(ip.(string)) {
+			// 127.0.0.1:8080格式
+			if strings.Contains(ip.(string), ":") {
+				ipt = strings.Split(ip.(string), ":")[0]
+			} else {
+				ipt = ip.(string)
+			}
+			if icmp(ipt) {
 				Println(fmt.Sprintf("[+] Find %v (icmp)", ip))
 				Alive = append(Alive, ip.(string))
 			}
 		} else {
-			if ping(ip.(string)) {
+			if strings.Contains(ip.(string), ":") {
+				ipt = strings.Split(ip.(string), ":")[0]
+			} else {
+				ipt = ip.(string)
+			}
+			if ping(ipt) {
 				Println(fmt.Sprintf("[+] Find %v (ping)", ip))
 				Alive = append(Alive, ip.(string))
 			}

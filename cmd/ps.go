@@ -6,6 +6,8 @@ import (
 	"github.com/spf13/cobra"
 	"math"
 	"net"
+	"strconv"
+	"strings"
 	"sync"
 	"time"
 )
@@ -74,8 +76,17 @@ func PortScan(host []string, ports []int) []PortResult {
 		})
 	})
 	for _, ip := range host {
-		wg.Add(1)
-		_ = p.Invoke(ip)
+		if strings.Contains(ip, ":") {
+			addr := strings.Split(ip, ":")[0]
+			port, _ := strconv.Atoi(strings.Split(ip, ":")[1])
+			if portConn(addr, port) {
+				Println(fmt.Sprintf("[+] %v %v open", addr, port))
+				tempPort = append(tempPort, PortResult{addr, []int{port}})
+			}
+		} else {
+			wg.Add(1)
+			_ = p.Invoke(ip)
+		}
 	}
 	wg.Wait()
 	return tempPort
