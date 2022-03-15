@@ -229,7 +229,7 @@ func ReadTextToDic(service, user, pass string) ([]string, []string) {
 		userdic = config.Userdict[service]
 		passdic = config.Passwords
 	)
-	// 入过不包含.txt的话，按照用户名和密码来算。其中
+	// 如果不包含.txt的话，按照用户名和密码来算。其中
 	if user != "" && !strings.Contains(user, ".txt") {
 		userdic = strings.Split(user, ",")
 	}

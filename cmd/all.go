@@ -64,10 +64,10 @@ func allRun(hostString string, portString string, jsonbool bool, runtime int, no
 		fmt.Println("----- [Yasso] Start do ping scan -----")
 		alive = execute(ips, RunICMP)
 	}
-	fmt.Println("[Yasoo get alive host] is", len(alive))
+	fmt.Println("[Yasso get alive host] is", len(alive))
 	// 做漏洞扫描
 	var out []JsonOut
-
+	//TODO:
 	if len(alive) > 0 {
 		fmt.Println("----- [Yasso] Start do vuln scan -----")
 		VulScan(alive, false, true, false) // 做漏洞扫描

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/panjf2000/ants/v2"
 	"github.com/spf13/cobra"
+	"strings"
 	"sync"
 )
 
@@ -67,6 +68,9 @@ func VulScan(ips []string, ms17010bool bool, allbool bool, smbGohstbool bool) {
 	})
 
 	for _, ip := range ips {
+		if strings.Contains(ip, ":") && !strings.Contains(ip, ":445") {
+			continue
+		}
 		wg.Add(1)
 		_ = p.Invoke(ip)
 	}
