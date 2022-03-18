@@ -14,7 +14,6 @@ go build -x -v -ldflags "-s -w"
 Yasso 将作为一款内网辅助渗透工具集发布，它集合了许多实用功能，来帮助`Red team`成员在内网极端环境下的工具使用以及`Blue team`成员的内网自检,并且程序加入了代理功能以及`ants`
 的扫描并发，在实现功能的同时追求准确和速度
 
-[![asciicast](https://asciinema.org/a/fBxRVxLJ30eVo0dOz2e9mlAZL.svg)](https://asciinema.org/a/fBxRVxLJ30eVo0dOz2e9mlAZL)
 
 使用格式为
 
@@ -25,6 +24,12 @@ Yasso [模块] [参数1] [参数2] [参数...]
 模块里面的 `Flag` 代表当前命令的参数，`Global Flags` 代表全局参数（所有命令都可以用）
 
 ## 程序功能模块 👻
+2022年3月18日更新 
+1. 增加了Redis的主从RCE和lua沙箱绕过RCE漏洞的利用方式（感谢云宇师傅@zyylhn的项目代码）
+2. 修复了部分bug，但是代码有点乱，后期有重构思想（等有空）
+3. 为-H的文件导入增加了127.0.0.1:700带端口的形式，让Yasso容错更多环境
+
+![image](https://user-images.githubusercontent.com/74412075/158973347-22443527-006d-4f67-8158-2100956a30dd.png)
 
 2022年1月7日更新 -H 参数均支持ip.txt的导入，如下
 
@@ -495,4 +500,5 @@ https://github.com/mindspoof/MSSQL-Fileless-Rootkit-WarSQLKit
 https://github.com/masterzen/winrm
 https://github.com/tomatome/grdp
 https://github.com/panjf2000/ants
+
 ```
