@@ -27,6 +27,7 @@ var (
 	SQLShellBool   bool          // 是否启动sql—shell
 	SQLCommand     string        // sql语句单条命令行
 	WinRMbool      bool          // winrm shell
+	NoCrack        bool          // 判断all模块是否爆破服务
 )
 
 var rootCmd = &cobra.Command{

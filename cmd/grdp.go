@@ -53,11 +53,11 @@ func BruteRdpByUser() {
 		}
 		if BruteFlag == true {
 			users, pass := ReadTextToDic("rdp", UserDic, PassDic)
-			Println(Clearln + "[*] Brute Module [rdp]")
-			Println(fmt.Sprintf(Clearln+"[*] Have [user:%v] [pass:%v] [request:%v]", len(users), len(pass), len(users)*len(pass)*len(ips)))
+			Println("[*] Brute Module [rdp]")
+			Println(fmt.Sprintf("[*] Have [user:%v] [pass:%v] [request:%v]", len(users), len(pass), len(users)*len(pass)*len(ips)))
 			SwitchBurp("rdp", users, pass, ips, BrutePort, Runtime, TimeDuration, BruteDomain)
 		} else {
-			Println(Clearln + "[*] May be you want to brute? try to add --crack")
+			Println("[*] May be you want to brute? try to add --crack")
 		}
 	}
 }

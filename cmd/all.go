@@ -25,6 +25,7 @@ func init() {
 	allCmd.Flags().StringVarP(&Hosts, "host", "H", "", "Set `hosts`(The format is similar to Nmap) or ips.txt file path")
 	allCmd.Flags().StringVarP(&Ports, "ports", "P", "", "Set `ports`(The format is similar to Nmap)")
 	allCmd.Flags().BoolVar(&PingBool, "noping", false, "No use ping to scanner alive host")
+	allCmd.Flags().BoolVar(&NoCrack, "nocrack", false, "Do not blast fragile service")
 	allCmd.Flags().BoolVar(&RunICMP, "icmp", false, "Use icmp to scanner alive host")
 	allCmd.Flags().IntVar(&Runtime, "runtime", 100, "Set scanner ants pool thread")
 	allCmd.Flags().StringVar(&ProxyHost, "proxy", "", "Set socks5 proxy")
@@ -71,11 +72,12 @@ func allRun(hostString string, portString string, jsonbool bool, runtime int, no
 	if len(alive) > 0 {
 		fmt.Println("----- [Yasso] Start do vuln scan -----")
 		VulScan(alive, false, true, false) // 做漏洞扫描
+		var PortResults []PortResult
 		if len(alive) != 0 {
 			fmt.Println("----- [Yasso] Start do port scan -----")
+			PortResults = PortScan(alive, ports)
 		}
-		PortResults := PortScan(alive, ports)
-		if len(PortResults) != 0 {
+		if len(PortResults) != 0 && NoCrack == false {
 			fmt.Println("----- [Yasso] Start do crack service -----")
 			for _, v := range PortResults {
 				var one JsonOut
@@ -152,8 +154,10 @@ func allRun(hostString string, portString string, jsonbool bool, runtime int, no
 			wg.Wait()
 		}
 		// 做网卡扫描
-		fmt.Println("----- [Yasso] Start do Windows service scan -----")
-		winscan(alive, true)
+		if len(alive) > 0 {
+			fmt.Println("----- [Yasso] Start do Windows service scan -----")
+			winscan(alive, true)
+		}
 		fmt.Println("----- [Yasso] Start do web service scan -----")
 		out = DisMapScanJson(&out, webports)
 	}

@@ -40,11 +40,11 @@ func BruteMysqlByUser() {
 		}
 		if BruteFlag == true {
 			users, pass := ReadTextToDic("mysql", UserDic, PassDic)
-			Println(Clearln + "[*] Brute Module [mysql]")
-			Println(fmt.Sprintf(Clearln+"[*] Have [user:%v] [pass:%v] [request:%v]", len(users), len(pass), len(users)*len(pass)*len(ips)))
+			Println("[*] Brute Module [mysql]")
+			Println(fmt.Sprintf("[*] Have [user:%v] [pass:%v] [request:%v]", len(users), len(pass), len(users)*len(pass)*len(ips)))
 			SwitchBurp("mysql", users, pass, ips, BrutePort, Runtime, TimeDuration, "")
 		} else {
-			Println(Clearln + "[*] May be you want to brute? try to add --crack")
+			Println("[*] May be you want to brute? try to add --crack")
 		}
 	}
 	if Hosts == "" && ConnHost != "" {

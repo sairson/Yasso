@@ -34,11 +34,11 @@ func BruteFtpByUser() {
 		}
 		if BruteFlag == true {
 			users, pass := ReadTextToDic("ftp", UserDic, PassDic)
-			Println(Clearln + "[*] Brute Module [ftp]")
-			Println(fmt.Sprintf(Clearln+"[*] Have [user:%v] [pass:%v] [request:%v]", len(users), len(pass), len(users)*len(pass)*len(ips)))
+			Println("[*] Brute Module [ftp]")
+			Println(fmt.Sprintf("[*] Have [user:%v] [pass:%v] [request:%v]", len(users), len(pass), len(users)*len(pass)*len(ips)))
 			SwitchBurp("ftp", users, pass, ips, BrutePort, Runtime, TimeDuration, "")
 		} else {
-			Println(Clearln + "[*] May be you want to brute? try to add --crack")
+			Println("[*] May be you want to brute? try to add --crack")
 		}
 	}
 }

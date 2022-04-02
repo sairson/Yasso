@@ -21,7 +21,6 @@ import (
 /*
 	内网mssql数据库比较多，可以完善一下clr和xp_cmdshell,spoacreate
 */
-
 var (
 	HelpWarSQLKit    int
 	InWarSQLKit      int
@@ -76,11 +75,11 @@ func MssqlBurpByUser() {
 		}
 		if BruteFlag == true {
 			users, pass := ReadTextToDic("mssql", UserDic, PassDic)
-			Println(Clearln + "[*] Brute Module [mssql]")
-			Println(fmt.Sprintf(Clearln+"[*] Have [user:%v] [pass:%v] [request:%v]", len(users), len(pass), len(users)*len(pass)*len(ips)))
+			Println("[*] Brute Module [mssql]")
+			Println(fmt.Sprintf("[*] Have [user:%v] [pass:%v] [request:%v]", len(users), len(pass), len(users)*len(pass)*len(ips)))
 			SwitchBurp("mssql", users, pass, ips, BrutePort, Runtime, TimeDuration, "")
 		} else {
-			Println(Clearln + "[*] May be you want to brute? try to add --crack")
+			Println("[*] May be you want to brute? try to add --crack")
 		}
 	}
 	if Hosts == "" && ConnHost != "" && LoginUser != "" && LoginPass != "" {

@@ -37,12 +37,12 @@ func BruteMongoByUser() {
 		}
 		if BruteFlag == true {
 			users, pass := ReadTextToDic("mongodb", UserDic, PassDic)
-			Println(Clearln + "[*] Brute Module [mongodb]")
-			Println(Clearln + "[*] MongoDB Authorized crack")
-			Println(fmt.Sprintf(Clearln+"[*] Have [user:%v] [pass:%v] [request:%v]", len(users), len(pass), len(users)*len(pass)*len(ips)))
+			Println("[*] Brute Module [mongodb]")
+			Println("[*] MongoDB Authorized crack")
+			Println(fmt.Sprintf("[*] Have [user:%v] [pass:%v] [request:%v]", len(users), len(pass), len(users)*len(pass)*len(ips)))
 			SwitchBurp("mongodb", users, pass, ips, BrutePort, Runtime, TimeDuration, "")
 		} else {
-			Println(Clearln + "[*] May be you want to brute? try to add --crack")
+			Println("[*] May be you want to brute? try to add --crack")
 		}
 	}
 }
@@ -115,7 +115,7 @@ func MongoUnAuth(info config.HostIn, user, pass string) (bool, error) {
 		text := string(reply[0:count])
 		if strings.Contains(text, "totalLinesWritten") {
 			flag = true
-			Println(fmt.Sprintf(Clearln+"[+] Mongodb %v unauthorized", info.Host))
+			Println(fmt.Sprintf("[+] Mongodb %v unauthorized", info.Host))
 		}
 	}
 	return flag, nil

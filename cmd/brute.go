@@ -5,10 +5,11 @@ import (
 	"bufio"
 	"fmt"
 	"github.com/panjf2000/ants/v2"
+	"github.com/projectdiscovery/cdncheck"
 	"github.com/spf13/cobra"
-	"io"
 	"log"
 	"math"
+	"net"
 	"os"
 	"reflect"
 	"strings"
@@ -17,10 +18,6 @@ import (
 )
 
 // 爆破模块
-
-const (
-	Clearln = "\r\x1b[2K"
-)
 
 var BruteCmd = &cobra.Command{
 	Use:   "crack",
@@ -108,7 +105,7 @@ func SwitchBurp(service string, users []string, pass []string, hosts []string, p
 		})
 	}
 	wg.Wait()
-	Println(fmt.Sprintf(Clearln+"[*] brute %s done", service))
+	Println(fmt.Sprintf("[*] brute %s done", service))
 
 	//Println()(service,users,pass,hosts,port,thread,BurpModule)
 }
@@ -137,16 +134,6 @@ func burpTask(host, service string, users []string, pass []string, port int, thr
 				all[i] = append(all[i], pass[tmp])
 			}
 		}
-	}
-	if run {
-		go func() {
-			for {
-				for _, r := range `-\|/` {
-					fmt.Printf("\r%c brute: wating ... %c", r, r)
-					time.Sleep(200 * time.Millisecond)
-				}
-			}
-		}()
 	}
 	if service == "redis" && run == true {
 		BurpCall(BurpModule, "unredis", config.HostIn{Host: host, Port: BrutePort, TimeOut: TimeDuration}, "test", "test")
@@ -195,7 +182,7 @@ func burpStatus(result []reflect.Value, service, host, domain, user, pass string
 						out.WeakPass = append(out.WeakPass, map[string]map[string]string{service: {user: pass}})
 						lock.Unlock()
 					}
-					Println(fmt.Sprintf(Clearln+`[+] %s brute %s success [%v%s:%s]`, host, service, domain, user, pass))
+					Println(fmt.Sprintf(`[+] %s brute %s success [%v%s:%s]`, host, service, domain, user, pass))
 				}
 			}
 		}
@@ -203,24 +190,16 @@ func burpStatus(result []reflect.Value, service, host, domain, user, pass string
 }
 
 func Readiness(file *os.File) []string {
-	var readiness []string       /*定义一个空切片用于存储遍历后的数据*/
-	buf := bufio.NewReader(file) /*建立一个缓冲区，将文本内容写入缓冲区*/
-	for {
-		data, errR := buf.ReadBytes('\n') /*读取到\n截至*/
-		if errR != nil {
-			if errR == io.EOF {
-				break
-			}
-			return readiness
+	var readiness []string /*定义一个空切片用于存储遍历后的数据*/
+	scanner := bufio.NewScanner(file)
+	scanner.Split(bufio.ScanLines)
+	for scanner.Scan() {
+		text := strings.TrimSpace(scanner.Text())
+		if text != "" {
+			readiness = append(readiness, text)
 		}
-		str := strings.TrimSpace(string(data))
-		// 修复读取时出现空的导致抛出panic
-		if str == "" {
-			continue
-		}
-
-		readiness = append(readiness, str) /*将去除换行符的字符串写入切片*/
 	}
+	readiness = SplitUrlToIpList(readiness, 100)
 	return readiness
 }
 
@@ -240,7 +219,7 @@ func ReadTextToDic(service, user, pass string) ([]string, []string) {
 	if user != "" && strings.Contains(user, ".txt") {
 		userive, err := os.Open(user)
 		if err != nil {
-			Println(fmt.Sprintf(Clearln+"[ERROR] Open %s is failed,please check your user dic path", UserDic))
+			Println(fmt.Sprintf("[ERROR] Open %s is failed,please check your user dic path", UserDic))
 			return []string{}, []string{}
 		}
 		userdic = Readiness(userive)
@@ -248,10 +227,84 @@ func ReadTextToDic(service, user, pass string) ([]string, []string) {
 	if pass != "" && strings.Contains(pass, ".txt") {
 		passive, err := os.Open(pass)
 		if err != nil {
-			Println(fmt.Sprintf(Clearln+"[ERROR] Open %s is failed,please check your pass dic path", PassDic))
+			Println(fmt.Sprintf("[ERROR] Open %s is failed,please check your pass dic path", PassDic))
 			return []string{}, []string{}
 		}
 		passdic = Readiness(passive)
 	}
 	return userdic, passdic
+}
+
+func SplitUrlToIpList(list []string, thread int) []string {
+	cdnClient, err := cdncheck.NewWithCache()
+	if err != nil {
+		Println(fmt.Sprintf("[ERROR] new cdn cache has an error %v", err))
+	}
+	checkChan := make(chan string, 100)
+	var wg sync.WaitGroup
+	var re []string
+	for i := 0; i < thread; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for host := range checkChan {
+				ip, err := net.LookupHost(host)
+				if err != nil {
+					continue
+				}
+				if ip != nil {
+					for _, i := range ip {
+						re = append(re, i)
+						Println(fmt.Sprintf("[*] %v:%v", host, ip))
+					}
+				}
+			}
+		}()
+	}
+	// 判断前缀，将其添加到需要解析的列表当中
+	for _, domain := range list {
+		if strings.Contains(domain, "http://") {
+			domain = strings.TrimPrefix(domain, "http://")
+		}
+		if strings.Contains(domain, "https://") {
+			domain = strings.TrimPrefix(domain, "https://")
+		}
+		checkChan <- domain
+	}
+	close(checkChan)
+	wg.Wait()
+	re = remove(re) // 移除重复结果
+	// 移除cdn结果
+	var resp []string
+	for _, ip := range re {
+		success := cdnFilter(ip, cdnClient)
+		if success != "" && !strings.Contains(ip, ":") {
+			resp = append(resp, success)
+		} else {
+			Println(fmt.Sprintf("[*] %s has cdn", ip))
+		}
+	}
+	return resp
+}
+
+// cdn 过滤器
+func cdnFilter(ip string, client *cdncheck.Client) string {
+	if found, _, err := client.Check(net.ParseIP(ip)); found && err == nil {
+		return ""
+	}
+	return ip
+}
+
+// remove 移除重复结果
+func remove(slc []string) []string {
+	var result []string
+	tempMap := map[string]byte{} // 存放不重复主键
+	for _, e := range slc {
+		l := len(tempMap)
+		tempMap[e] = 0
+		if len(tempMap) != l { // 加入map后，map长度变化，则元素不重复
+			result = append(result, e)
+		}
+	}
+	return result
 }

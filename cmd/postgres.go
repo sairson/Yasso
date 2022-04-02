@@ -35,11 +35,11 @@ func BrutePostgreByUser() {
 		}
 		if BruteFlag == true {
 			users, pass := ReadTextToDic("postgres", UserDic, PassDic)
-			Println(Clearln + "[*] Brute Module [postgres]")
-			Println(fmt.Sprintf(Clearln+"[*] Have [user:%v] [pass:%v] [request:%v]", len(users), len(pass), len(users)*len(pass)*len(ips)))
+			Println("[*] Brute Module [postgres]")
+			Println(fmt.Sprintf("[*] Have [user:%v] [pass:%v] [request:%v]", len(users), len(pass), len(users)*len(pass)*len(ips)))
 			SwitchBurp("postgres", users, pass, ips, BrutePort, Runtime, TimeDuration, "")
 		} else {
-			Println(Clearln + "[*] May be you want to brute? try to add --crack")
+			Println("[*] May be you want to brute? try to add --crack")
 		}
 	}
 }

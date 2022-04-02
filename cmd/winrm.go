@@ -44,11 +44,11 @@ func WinBurpByUser() {
 		}
 		if BruteFlag == true {
 			users, pass := ReadTextToDic("rdp", UserDic, PassDic) // winrm 和 rdp认证相同
-			Println(Clearln + "[*] Brute Module [winrm]")
-			Println(fmt.Sprintf(Clearln+"[*] Have [user:%v] [pass:%v] [request:%v]", len(users), len(pass), len(users)*len(pass)*len(ips)))
+			Println("[*] Brute Module [winrm]")
+			Println(fmt.Sprintf("[*] Have [user:%v] [pass:%v] [request:%v]", len(users), len(pass), len(users)*len(pass)*len(ips)))
 			SwitchBurp("winrm", users, pass, ips, BrutePort, Runtime, TimeDuration, "")
 		} else {
-			Println(Clearln + "[*] May be you want to brute? try to add --crack")
+			Println("[*] May be you want to brute? try to add --crack")
 		}
 	}
 	if Hosts == "" && ConnHost != "" && LoginUser != "" && LoginPass != "" {

@@ -49,32 +49,32 @@ func BruteSshByUser() {
 		if BruteFlag == true {
 			users, pass := ReadTextToDic("ssh", UserDic, PassDic)
 			//fmt.Println(users, pass)
-			Println(Clearln + "[*] Brute Module [ssh]")
-			Println(fmt.Sprintf(Clearln+"[*] Have [user:%v] [pass:%v] [request:%v]", len(users), len(pass), len(users)*len(pass)*len(ips)))
+			Println("[*] Brute Module [ssh]")
+			Println(fmt.Sprintf("[*] Have [user:%v] [pass:%v] [request:%v]", len(users), len(pass), len(users)*len(pass)*len(ips)))
 			SwitchBurp("ssh", users, pass, ips, BrutePort, Runtime, TimeDuration, "")
 		} else {
-			Println(Clearln + "[*] May be you want to brute? try to add --crack")
+			Println("[*] May be you want to brute? try to add --crack")
 		}
 	}
 	if ConnHost != "" && Hosts == "" && (LoginUser != "" && (LoginPass != "" || LoginPublicKey != "")) && BruteFlag != true {
 		if LoginUser != "" && LoginPass != "" {
 			client, status, err := SshConnByUser(config.HostIn{Host: ConnHost, Port: BrutePort, TimeOut: TimeDuration}, LoginUser, LoginPass)
 			if err != nil {
-				Println(fmt.Sprintf(Clearln+"[-] Login ssh failed %v", err))
+				Println(fmt.Sprintf("[-] Login ssh failed %v", err))
 				return
 			}
 			if status == true {
 				//认证成功
 				SshLogin(client)
 			} else {
-				Println(Clearln + "[-] The username or password is incorrect")
+				Println("[-] The username or password is incorrect")
 				return
 			}
 		}
 		if LoginPublicKey != "" && LoginUser != "" {
 			client, status, err := sshConnByKey(config.HostIn{Host: ConnHost, Port: BrutePort, TimeOut: TimeDuration, PublicKey: LoginPublicKey}, LoginUser)
 			if err != nil {
-				Println(fmt.Sprintf(Clearln+"[-] Login ssh failed %v", err))
+				Println(fmt.Sprintf("[-] Login ssh failed %v", err))
 				return
 			}
 			if status == true {
@@ -82,13 +82,13 @@ func BruteSshByUser() {
 				SshLogin(client)
 				return
 			} else {
-				Println(Clearln + "[-] The username or password is incorrect")
+				Println("[-] The username or password is incorrect")
 				return
 			}
 		}
 	}
 	if Hosts == "" && ConnHost != "" && BruteFlag == false && (LoginUser == "" || LoginPublicKey == "") {
-		Println(Clearln + "[*] May be you want login ssh? try to add user and (user' key) or (user' pass)")
+		Println("[*] May be you want login ssh? try to add user and (user' key) or (user' pass)")
 		return
 	}
 }
