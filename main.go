@@ -1,12 +1,6 @@
 package main
 
-import (
-	"Yasso/cmd"
-)
-
-func init() {
-	cmd.CreateLogFile("Yasso.log")
-}
+import "Yasso/cmd"
 
 func main() {
 	cmd.Execute()
