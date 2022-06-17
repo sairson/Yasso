@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d434aa11-9789-419c-9b84-854d0d1de639" name="变更" comment="" />
+    <list default="true" id="d434aa11-9789-419c-9b84-854d0d1de639" name="变更" comment="Yasso更新大改动，更新扫描方式，去除不常用功能，增加指纹和协议识别，修补bug等">
+      <change afterPath="$PROJECT_DIR$/core/plugin/dcerpc.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/plugin/nbns_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yasso.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Yasso.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/plugin/all.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/plugin/all.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/plugin/eternalblue.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/plugin/eternalblue.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result.txt" beforeDir="false" afterPath="$PROJECT_DIR$/result.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,6 +51,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
     &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
@@ -148,6 +157,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Yasso更新大改动，更新扫描方式，去除不常用功能，增加指纹和协议识别，修补bug等" />
+    <option name="LAST_COMMIT_MESSAGE" value="Yasso更新大改动，更新扫描方式，去除不常用功能，增加指纹和协议识别，修补bug等" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

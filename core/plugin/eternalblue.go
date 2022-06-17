@@ -112,12 +112,8 @@ func RequestMs17010(conn net.Conn, ip string) (bool, error) {
 	}
 
 	if reply[9] == 0x05 && reply[10] == 0x02 && reply[11] == 0x00 && reply[12] == 0xc0 {
-		//fmt.Printf("%s\tMS17-010\t(%s)\n", ip, os)
-		//if runtime.GOOS=="windows" {fmt.Printf("%s\tMS17-010\t(%s)\n", ip, os)
-		//} else{fmt.Printf("\033[33m%s\tMS17-010\t(%s)\033[0m\n", ip, os)}
-		//color.Magenta("%s\tMS17-010\t(%s)\n", ip, os)
+
 		logger.Info(fmt.Sprintf("%v Find MS17010 (%s)", ip, os))
-		// detect present of DOUBLEPULSAR SMB implant
 		trans2SessionSetupRequest[28] = treeID[0]
 		trans2SessionSetupRequest[29] = treeID[1]
 		trans2SessionSetupRequest[32] = userID[0]

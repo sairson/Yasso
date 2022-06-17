@@ -1158,3 +1158,249 @@
 [+] [LAPTOP-ESQC1EPT 192.168.23.1 192.168.248.1 2.0.0.1 192.168.0.184]
 [+] 192.168.248.1 Find CVE-2020-0796
 [*] Yasso scan complete
+[*] 192.168.248.1 is alive (ping)
+[*] 192.168.248.1:135 is open
+[*] 192.168.248.1:25 is open
+[*] 192.168.248.1:445 is open
+[*] 192.168.248.1:139 is open
+[*] 192.168.248.1:110 is open
+[*] 192.168.248.1:8443 is open
+[+] https://192.168.248.1:8443 200  [Apache2 Ubuntu Default Page: It works]
+[+] [192.168.248.1:445]
+[10.0.19041 (version) || LAPTOP-ESQC1EPT (FQDN Name) ||LAPTOP-ESQC1EPT (Domain Name) ||LAPTOP-ESQC1EPT (Netbios Name)]
+[+] [LAPTOP-ESQC1EPT 192.168.0.184 192.168.23.1 192.168.248.1 2.0.0.1]
+[+] 192.168.248.1 Find CVE-2020-0796
+[*] Yasso scan complete
+[*] 192.168.248.207 is alive (ping)
+[*] 192.168.248.206 is alive (ping)
+[*] 192.168.248.203 is alive (ping)
+[*] 192.168.248.1 is alive (ping)
+[*] 192.168.248.207:22 is open
+[*] 192.168.248.206:135 is open
+[*] 192.168.248.206:139 is open
+[*] 192.168.248.206:3389 is open
+[*] 192.168.248.206:445 is open
+[*] 192.168.248.203:22 is open
+[*] 192.168.248.1:135 is open
+[*] 192.168.248.1:139 is open
+[*] 192.168.248.1:445 is open
+[*] 192.168.248.206:3389 [Windows 10/Windows 11/Windows Server 2019]
+[*] 192.168.248.203:22 [SSH-2.0-OpenSSH_8.9p1\x20Debian-3]
+[+] brute 192.168.248.203:22 success [root:kali][ssh]
+[*] 192.168.248.207:22 [SSH-2.0-OpenSSH_7.4]
+[+] [192.168.248.206:137] WORKGROUP\DESKTOP-Q258H04
+[+] [192.168.248.206:445]
+[10.0.19041 (version) || DESKTOP-Q258H04 (FQDN Name) ||DESKTOP-Q258H04 (Domain Name) ||DESKTOP-Q258H04 (Netbios Name)]
+[+] [DESKTOP-Q258H04 192.168.248.206]
+[+] [192.168.248.1:445]
+[10.0.19041 (version) || LAPTOP-ESQC1EPT (FQDN Name) ||LAPTOP-ESQC1EPT (Domain Name) ||LAPTOP-ESQC1EPT (Netbios Name)]
+[+] [LAPTOP-ESQC1EPT 192.168.100.175 192.168.23.1 192.168.248.1 2.0.0.1]
+[+] 192.168.248.206 Find CVE-2020-0796
+[+] 192.168.248.1 Find CVE-2020-0796
+[*] Yasso scan complete
+[*] 192.168.248.1 is alive (ping)
+[*] 192.168.248.1:8443 is open
+[*] 192.168.248.1:135 is open
+[*] 192.168.248.1:139 is open
+[*] 192.168.248.1:445 is open
+[*] 192.168.248.1:8080 is open
+[+] http://192.168.248.1:8080 200 [Node.js]  [None]
+[+] https://192.168.248.1:8443 200  [Apache2 Ubuntu Default Page: It works]
+[+] [192.168.248.1:445]
+[10.0.19041 (version) || LAPTOP-ESQC1EPT (FQDN Name) ||LAPTOP-ESQC1EPT (Domain Name) ||LAPTOP-ESQC1EPT (Netbios Name)]
+[+] [LAPTOP-ESQC1EPT 192.168.23.1 192.168.248.1 192.168.100.175 2.0.0.1]
+[+] 192.168.248.1 Find CVE-2020-0796
+[*] Yasso scan complete
+[*] 192.168.248.1 is alive (ping)
+[*] 192.168.248.1:135 is open
+[*] 192.168.248.1:139 is open
+[*] 192.168.248.1:445 is open
+[+] [192.168.248.1:445]
+[10.0.19041 (version) || LAPTOP-ESQC1EPT (FQDN Name) ||LAPTOP-ESQC1EPT (Domain Name) ||LAPTOP-ESQC1EPT (Netbios Name)]
+[+] [LAPTOP-ESQC1EPT 192.168.23.1 192.168.248.1 192.168.100.175 2.0.0.1]
+[+] 192.168.248.1 Find CVE-2020-0796
+[*] Yasso scan complete
+[*] 192.168.248.203 is alive (ping)
+[*] 192.168.248.217 is alive (ping)
+[*] 192.168.248.1 is alive (ping)
+[*] 192.168.248.203:22 is open
+[*] 192.168.248.203:445 is open
+[*] 192.168.248.203:139 is open
+[*] 192.168.248.217:3389 is open
+[*] 192.168.248.217:135 is open
+[*] 192.168.248.217:139 is open
+[*] 192.168.248.217:445 is open
+[*] 192.168.248.1:135 is open
+[*] 192.168.248.1:139 is open
+[*] 192.168.248.1:445 is open
+[*] 192.168.248.203:22 [SSH-2.0-OpenSSH_8.9p1\x20Debian-3]
+[+] brute 192.168.248.203:22 success [root:kali][ssh]
+[*] smb 192.168.248.203 unauthorized
+[*] 192.168.248.217:3389 [Windows 10/Windows 11/Windows Server 2019]
+[+] [192.168.248.203:445]
+[6.1.0 (version) || kali (FQDN Name) ||KALI (Domain Name) ||KALI (Netbios Name)]
+[+] [192.168.248.217:137] WORKGROUP\DESKTOP-Q258H04
+[+] [192.168.248.217:445]
+[10.0.19041 (version) || DESKTOP-Q258H04 (FQDN Name) ||DESKTOP-Q258H04 (Domain Name) ||DESKTOP-Q258H04 (Netbios Name)]
+[+] [DESKTOP-Q258H04 192.168.248.217]
+[+] [192.168.248.1:445]
+[10.0.19041 (version) || LAPTOP-ESQC1EPT (FQDN Name) ||LAPTOP-ESQC1EPT (Domain Name) ||LAPTOP-ESQC1EPT (Netbios Name)]
+[+] [LAPTOP-ESQC1EPT 192.168.23.1 192.168.248.1 192.168.100.175 2.0.0.1]
+[+] 192.168.248.217 Find CVE-2020-0796
+[+] 192.168.248.1 Find CVE-2020-0796
+[*] Yasso scan complete
+[*] 192.168.248.1 is alive (ping)
+[*] 192.168.248.212 is alive (ping)
+[*] 192.168.248.223 is alive (ping)
+[*] 192.168.248.203 is alive (ping)
+[*] 192.168.248.1:135 is open
+[*] 192.168.248.1:445 is open
+[*] 192.168.248.1:139 is open
+[*] 192.168.248.212:53 is open
+[*] 192.168.248.223:135 is open
+[*] 192.168.248.223:139 is open
+[*] 192.168.248.223:445 is open
+[*] 192.168.248.223:3389 is open
+[*] 192.168.248.203:445 is open
+[*] 192.168.248.203:22 is open
+[*] 192.168.248.203:139 is open
+[*] 192.168.248.223:3389 [Windows 10/Windows 11/Windows Server 2019]
+[*] 192.168.248.203:22 [SSH-2.0-OpenSSH_8.9p1\x20Debian-3]
+[+] brute 192.168.248.203:22 success [kali:kali][ssh]
+[*] smb 192.168.248.203 unauthorized
+[+] [192.168.248.1:445]
+[10.0.19041 (version) || LAPTOP-ESQC1EPT (FQDN Name) ||LAPTOP-ESQC1EPT (Domain Name) ||LAPTOP-ESQC1EPT (Netbios Name)]
+[+] [LAPTOP-ESQC1EPT 192.168.248.1 192.168.100.175 192.168.23.1 2.0.0.1]
+[+] [192.168.248.212:137] KLION\DC02 [[31;1mDomain Controllers[0m]
+[+] [192.168.248.212:445]
+[6.3.9600 (version) || Dc02.klion.local (FQDN Name) ||KLION (Domain Name) ||DC02 (Netbios Name)]
+[+] [Dc02 192.168.248.212]
+[+] [192.168.248.223:137] WORKGROUP\DESKTOP-Q258H04
+[+] [192.168.248.223:445]
+[10.0.19041 (version) || DESKTOP-Q258H04 (FQDN Name) ||DESKTOP-Q258H04 (Domain Name) ||DESKTOP-Q258H04 (Netbios Name)]
+[+] [DESKTOP-Q258H04 192.168.248.223]
+[+] [192.168.248.203:445]
+[6.1.0 (version) || kali (FQDN Name) ||KALI (Domain Name) ||KALI (Netbios Name)]
+[+] 192.168.248.1 Find CVE-2020-0796
+[*] 192.168.248.212 Find MS17010 (Windows Server 2012 R2 Standard 9600)
+[+] 192.168.248.223 Find CVE-2020-0796
+[*] Yasso scan complete
+[*] 192.168.248.1 is alive (ping)
+[*] 192.168.248.223 is alive (ping)
+[*] 192.168.248.203 is alive (ping)
+[*] 192.168.248.212 is alive (ping)
+[*] 192.168.248.223:135 is open
+[*] 192.168.248.223:139 is open
+[*] 192.168.248.223:445 is open
+[*] 192.168.248.223:3389 is open
+[*] 192.168.248.1:139 is open
+[*] 192.168.248.1:135 is open
+[*] 192.168.248.1:445 is open
+[*] 192.168.248.203:445 is open
+[*] 192.168.248.203:22 is open
+[*] 192.168.248.203:139 is open
+[*] 192.168.248.212:88 is open
+[*] 192.168.248.212:139 is open
+[*] 192.168.248.212:135 is open
+[*] 192.168.248.212:445 is open
+[*] 192.168.248.212:3389 is open
+[*] 192.168.248.212:80 is open
+[*] 192.168.248.212:53 is open
+[*] 192.168.248.212:389 is open
+[*] 192.168.248.212:49155 is open
+[*] 192.168.248.223:3389 [Windows 10/Windows 11/Windows Server 2019]
+[*] 192.168.248.203:22 [SSH-2.0-OpenSSH_8.9p1\x20Debian-3]
+[+] brute 192.168.248.203:22 success [root:kali][ssh]
+[*] smb 192.168.248.203 unauthorized
+[+] http://192.168.248.212 200 [IIS]  [IIS Windows Server]
+[*] 192.168.248.212:3389 [Windows 10/Windows 11/Windows Server 2019]
+[+] [192.168.248.1:445]
+[10.0.19041 (version) || LAPTOP-ESQC1EPT (FQDN Name) ||LAPTOP-ESQC1EPT (Domain Name) ||LAPTOP-ESQC1EPT (Netbios Name)]
+[+] [LAPTOP-ESQC1EPT 192.168.248.1 192.168.100.175 192.168.23.1 2.0.0.1]
+[*] Windows Verison 10.0 Build 19041 x64
+[*] NetBios (LAPTOP-ESQC1EPT) DomainName (LAPTOP-ESQC1EPT) ComputerName (LAPTOP-ESQC1EPT)
+[+] [192.168.248.223:137] WORKGROUP\DESKTOP-Q258H04
+[+] [192.168.248.223:445]
+[10.0.19041 (version) || DESKTOP-Q258H04 (FQDN Name) ||DESKTOP-Q258H04 (Domain Name) ||DESKTOP-Q258H04 (Netbios Name)]
+[+] [DESKTOP-Q258H04 192.168.248.223]
+[*] Windows Verison 10.0 Build 19041 x64
+[*] NetBios (DESKTOP-Q258H04) DomainName (úÒöÃ‚Ø) ComputerName ()
+[+] [192.168.248.203:445]
+[6.1.0 (version) || kali (FQDN Name) ||KALI (Domain Name) ||KALI (Netbios Name)]
+[+] [192.168.248.212:137] KLION\DC02 [[31;1mDomain Controllers[0m]
+[+] [192.168.248.212:445]
+[6.3.9600 (version) || Dc02.klion.local (FQDN Name) ||KLION (Domain Name) ||DC02 (Netbios Name)]
+[+] [Dc02 192.168.248.212]
+[*] Windows Verison 6.3 Build 9600 x64
+[*] NetBios () DomainName () ComputerName ()
+[+] 192.168.248.1 Find CVE-2020-0796
+[+] 192.168.248.223 Find CVE-2020-0796
+[*] 192.168.248.212 Find MS17010 (Windows Server 2012 R2 Standard 9600)
+[*] Yasso scan complete
+[*] 192.168.248.212 is alive (ping)
+[*] 192.168.248.212:53 is open
+[*] 192.168.248.212:139 is open
+[*] 192.168.248.212:445 is open
+[*] 192.168.248.212:135 is open
+[*] 192.168.248.212:88 is open
+[*] 192.168.248.212:80 is open
+[*] 192.168.248.212:49155 is open
+[*] 192.168.248.212:389 is open
+[*] 192.168.248.212:3389 is open
+[+] http://192.168.248.212 200 [IIS]  [IIS Windows Server]
+[*] 192.168.248.212:3389 [Windows 10/Windows 11/Windows Server 2019]
+[+] [192.168.248.212:137] KLION\DC02 [[31;1mDomain Controllers[0m]
+[+] [192.168.248.212:445]
+[6.3.9600 (version) || Dc02.klion.local (FQDN Name) ||KLION (Domain Name) ||DC02 (Netbios Name)]
+[+] [Dc02 192.168.248.212]
+[+] Windows Verison 6.3 Build 9600 x64
+[*] 192.168.248.212 Find MS17010 (Windows Server 2012 R2 Standard 9600)
+[*] Yasso scan complete
+[*] 192.168.248.212 is alive (ping)
+[*] 192.168.248.212:3389 is open
+[*] 192.168.248.212:53 is open
+[*] 192.168.248.212:49155 is open
+[*] 192.168.248.212:139 is open
+[*] 192.168.248.212:445 is open
+[*] 192.168.248.212:389 is open
+[*] 192.168.248.212:80 is open
+[*] 192.168.248.212:135 is open
+[*] 192.168.248.212:88 is open
+[+] http://192.168.248.212 200 [IIS]  [IIS Windows Server]
+[*] 192.168.248.212:3389 [Windows 10/Windows 11/Windows Server 2019]
+[+] [192.168.248.212:137] KLION\DC02 [[31;1mDomain Controllers[0m]
+[+] [192.168.248.212:445]
+[6.3.9600 (version) || Dc02.klion.local (FQDN Name) ||KLION (Domain Name) ||DC02 (Netbios Name)]
+[+] [Dc02 192.168.248.212]
+[+] %!v(MISSING):%!v(MISSING) %!v(MISSING) 192.168.248.212 135 Windows Verison 6.3 Build 9600 x64
+[*] 192.168.248.212 Find MS17010 (Windows Server 2012 R2 Standard 9600)
+[*] Yasso scan complete
+[*] 192.168.248.212 is alive (ping)
+[*] 192.168.248.212:53 is open
+[*] 192.168.248.212:445 is open
+[*] 192.168.248.212:49155 is open
+[*] 192.168.248.212:88 is open
+[*] 192.168.248.212:139 is open
+[*] 192.168.248.212:135 is open
+[*] 192.168.248.212:3389 is open
+[*] 192.168.248.212:389 is open
+[*] 192.168.248.212:80 is open
+[+] http://192.168.248.212 200 [IIS]  [IIS Windows Server]
+[*] 192.168.248.212:3389 [Windows 10/Windows 11/Windows Server 2019]
+[+] [192.168.248.212:137] KLION\DC02 [[31;1mDomain Controllers[0m]
+[+] [192.168.248.212:445]
+[6.3.9600 (version) || Dc02.klion.local (FQDN Name) ||KLION (Domain Name) ||DC02 (Netbios Name)]
+[+] [Dc02 192.168.248.212]
+[+] 192.168.248.212:135 Windows Verison 6.3 Build 9600 x64
+[*] 192.168.248.212 Find MS17010 (Windows Server 2012 R2 Standard 9600)
+[*] Yasso scan complete
+[*] 192.168.248.1 is alive (ping)
+[*] 192.168.248.1:135 is open
+[*] 192.168.248.1:445 is open
+[*] 192.168.248.1:139 is open
+[+] [192.168.248.1:445]
+[10.0.19041 (version) || LAPTOP-ESQC1EPT (FQDN Name) ||LAPTOP-ESQC1EPT (Domain Name) ||LAPTOP-ESQC1EPT (Netbios Name)]
+[+] [LAPTOP-ESQC1EPT 192.168.248.1 192.168.100.175 192.168.23.1 2.0.0.1]
+[+] 192.168.248.1:135 Windows Verison 10.0 Build 19041 x64
+[+] 192.168.248.1 Find CVE-2020-0796
+[*] Yasso scan complete

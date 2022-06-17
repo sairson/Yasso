@@ -372,6 +372,10 @@ func (s *scannerAll) RunEnumeration() {
 						if ok {
 							logger.JSONSave(ip, logger.InformationSave, "oxid", information)
 						}
+						ok, information = DceRpcOSVersion(ip, 135, s.timeout)
+						if ok {
+							logger.JSONSave(ip, logger.InformationSave, "dcerpc", information)
+						}
 					}(ip)
 					mutex.Unlock()
 				}
